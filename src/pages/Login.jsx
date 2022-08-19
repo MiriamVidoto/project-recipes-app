@@ -24,6 +24,9 @@ function Login({ history }) {
   };
 
   const routeFoods = () => {
+    localStorage.setItem('user', JSON.stringify({ email }));
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
     history.push('/foods');
   };
 

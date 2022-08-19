@@ -2,7 +2,7 @@ import React from 'react';
 
 function FoodProgress() {
   return (
-<div> FoodProgress</div>
+    <div> FoodProgress</div>
   );
 }
 

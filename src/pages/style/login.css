@@ -1,12 +1,12 @@
 body {
-  background-color: rgba(255, 0, 0, 0.233);
+  background-color: rgba(255, 0, 0, 0.171);
 }
 
 .container {
   align-items: center;
-  background-color: rgba(255, 60, 0, 0.363);
+  background-color: rgba(255, 60, 0, 0.404);
   border-radius: 5px;
-  box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.4);
+  box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.6);
   display: flex;
   flex-direction: column;
   height: 50vh;
@@ -19,8 +19,8 @@ body {
   border: none;
   border-radius: 5px;
   box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.4);
-  margin: 5px;
   padding: 5px;
+  width: 100%;
 }
 
 .buttonLogin {
@@ -32,4 +32,9 @@ body {
   color: white;
   margin: 5px;
   padding: 5px 15px;
+}
+
+label {
+  color: white;
+  font-weight: 800;
 }

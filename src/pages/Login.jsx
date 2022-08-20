@@ -14,6 +14,7 @@ function Login({ history }) {
     if (!!regex.test(email) && password.length > passwordLength) {
       return setIsDisabled(false);
     }
+    return setIsDisabled(true);
   }, [email, password]);
 
   const handlePassword = ({ target }) => {

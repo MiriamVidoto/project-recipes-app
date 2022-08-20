@@ -52,6 +52,7 @@ h4 {
 
 .buttonLogin:disabled {
   background-color: rgba(68, 68, 68, 0.747);
+  cursor: default;
 }
 
 label {

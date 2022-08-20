@@ -1,0 +1,13 @@
+.buttonsCategory {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.buttonsCategory button {
+  border: none;
+  border-radius: 4px;
+  margin-bottom: 5px;
+  width: 100px;
+}

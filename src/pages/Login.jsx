@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
+import rockGlass from '../images/rockGlass.svg';
 import './style/login.css';
 
 function Login({ history }) {
@@ -32,6 +33,8 @@ function Login({ history }) {
 
   return (
     <form className="container">
+      <img src={ rockGlass } alt="rockGlass" />
+      <h4>TrybeFood</h4>
       <label htmlFor="email">
         Email:
         <input

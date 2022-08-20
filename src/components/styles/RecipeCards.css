@@ -1,0 +1,26 @@
+.recipeCards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.recipeCard {
+  align-items: center;
+  background-color: rgba(239, 239, 237, 0.282);
+  border-radius: 8px;
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.342);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 10px;
+  width: 170px;
+}
+
+.recipeCard h2 {
+  font-size: 1em;
+}
+
+.recipeCard img {
+  margin-bottom: 5px;
+  width: 135px;
+}

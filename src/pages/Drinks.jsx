@@ -1,8 +1,13 @@
 import React from 'react';
+import ButtonsCategory from '../components/ButtonsCategory';
+import RecipeCards from '../components/RecipeCards';
 
 function Drinks() {
   return (
-    <div> Drinks</div>
+    <div>
+      <ButtonsCategory />
+      <RecipeCards />
+    </div>
   );
 }
 

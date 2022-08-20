@@ -9,12 +9,12 @@ function RecipeCards() {
   { idMeal: '52945',
     strMeal: 'Kung Pao Chicken',
     strMealThumb: 'https://www.themealdb.com/images/media/meals/1525872624.jpg' }];
-  const meal = true;
+  const type = 'meal';
 
   const LIMIT_RECIPES = 12;
-  const recipeType = meal ? 'Meal' : 'Drink';
-  const recipeTypeId = meal ? 'idMeal' : 'idDrink';
-  const pathType = meal ? 'foods' : 'drinks';
+  const recipeType = type === 'meal' ? 'Meal' : 'Drink';
+  const recipeTypeId = type === 'meal' ? 'idMeal' : 'idDrink';
+  const pathType = type === 'meal' ? 'foods' : 'drinks';
 
   return (
     <div className="recipeCards">

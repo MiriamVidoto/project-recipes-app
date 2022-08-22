@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../components/Header';
 import ButtonsCategory from '../components/ButtonsCategory';
+import Footer from '../components/Footer';
 import RecipeCards from '../components/RecipeCards';
 
 function Drinks() {
@@ -9,6 +10,7 @@ function Drinks() {
       <Header title="Drinks" />
       <ButtonsCategory />
       <RecipeCards />
+      <Footer />
     </div>
   );
 }

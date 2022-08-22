@@ -1,17 +1,10 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React from 'react';
 import myContext from './Context';
 
 function Provider({ children }) {
-  const [showSearchIcon, setShowSearchIcon] = useState(false);
-
-  const value = {
-    showSearchIcon,
-    setShowSearchIcon,
-  };
-
   return (
-    <myContext.Provider value={ value }>
+    <myContext.Provider>
       { children }
     </myContext.Provider>
   );

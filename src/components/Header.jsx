@@ -3,13 +3,15 @@ import { useHistory } from 'react-router-dom';
 import propTypes from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import SearchBar from './SearchBar';
 
 function Header({ title }) {
   const history = useHistory();
-  const [showSearchIcon, setShowSearchIcon] = useState(false);
+  const [searchIconCondition, setSearchIconCondition] = useState(false);
+  const [showSearchBar, setShowSearchBar] = useState(false);
 
   useEffect(() => {
-    if (title === 'Drinks' || title === 'Foods') return setShowSearchIcon(true);
+    if (title === 'Drinks' || title === 'Foods') return setSearchIconCondition(true);
   }, [title]);
 
   return (
@@ -26,9 +28,10 @@ function Header({ title }) {
         />
       </button>
       {
-        showSearchIcon && (
+        searchIconCondition && (
           <button
             type="button"
+            onClick={ () => (setShowSearchBar(!showSearchBar)) }
           >
             <img
               data-testid="search-top-btn"
@@ -38,12 +41,13 @@ function Header({ title }) {
           </button>
         )
       }
+      <SearchBar showSearchBar={ showSearchBar } />
     </header>
   );
 }
 
 Header.propTypes = {
-  title: propTypes.string.isRequired,
-};
+  title: propTypes.string,
+}.isRequired;
 
 export default Header;

@@ -8,8 +8,6 @@ const searchInputId = 'search-input';
 const userBtnId = 'profile-top-btn';
 const showSearchBtnId = 'search-top-btn';
 
-
-
 describe('Testando o componente Header', () => {
   test('Testando compoentes em tela', () => {
     renderWithRouter(<App />);

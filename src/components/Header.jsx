@@ -7,11 +7,13 @@ import SearchBar from './SearchBar';
 
 function Header({ title }) {
   const history = useHistory();
-  const [searchIconCondition, setSearchIconCondition] = useState(false);
+  const [searchIconCondition, setSearchIconCondition] = useState(true);
   const [showSearchBar, setShowSearchBar] = useState(false);
 
   useEffect(() => {
-    if (title === 'Drinks' || title === 'Foods') return setSearchIconCondition(true);
+    if (title === 'Done Recipes' || title === 'Profile'
+    || title === 'Favorite Recipes') return setSearchIconCondition(false);
+    setSearchIconCondition(true);
   }, [title]);
 
   return (

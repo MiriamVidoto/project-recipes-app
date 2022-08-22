@@ -1,14 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import myContext from '../context/Context';
 import './styles/RecipeCards.css';
 
 function RecipeCards() {
-  const recipes = [{ idMeal: '52770',
-    strMeal: 'Spaghetti Bolognese',
-    strMealThumb: 'https://www.themealdb.com/images/media/meals/sutysw1468247559.jpg' },
-  { idMeal: '52945',
-    strMeal: 'Kung Pao Chicken',
-    strMealThumb: 'https://www.themealdb.com/images/media/meals/1525872624.jpg' }];
+  const { recipes } = useContext(myContext);
   const type = 'meal';
 
   const LIMIT_RECIPES = 12;

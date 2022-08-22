@@ -1,31 +1,65 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import propTypes from 'prop-types';
+import myContext from '../context/Context';
 
 function SearchBar({ showSearchBar }) {
+  const {
+    setCategory,
+    searchInput,
+    setSearchInput,
+    getSearchAPI,
+  } = useContext(myContext);
+
   return (
     <section>
       { showSearchBar && (
         <div>
-          <input
-            data-testid="search-input"
-            type="text"
-          />
-          <form action="form-action">
-            <p>
-              <input type="radio" data-testid="ingredient-search-radio" />
-              ingredient
-              <input type="radio" data-testid="name-search-radio" />
-              name
-              <input type="radio" data-testid="first-letter-search-radio" />
-              first-letter
-            </p>
-            <p>
-              <input type="button" data-testid="exec-search-btn" value="Search" />
-            </p>
+          <form>
+            <label htmlFor="insearch-inputput">
+              <input
+                data-testid="search-input"
+                type="text"
+                value={ searchInput }
+                onChange={ ({ target: { value } }) => setSearchInput(value) }
+              />
+            </label>
+            <label htmlFor="category">
+              <input
+                name="categoty-name"
+                type="radio"
+                data-testid="ingredient-search-radio"
+                value="ingredient"
+                onChange={ ({ target: { value } }) => setCategory(value) }
+              />
+              Ingredient
+              <input
+                name="categoty-name"
+                type="radio"
+                data-testid="name-search-radio"
+                value="nameSearch"
+                onChange={ ({ target: { value } }) => setCategory(value) }
+              />
+              Name
+              <input
+                name="categoty-name"
+                type="radio"
+                data-testid="first-letter-search-radio"
+                value="firstLetter"
+                onChange={ ({ target: { value } }) => setCategory(value) }
+              />
+              First letter
+            </label>
+            <button
+              data-testid="exec-search-btn"
+              type="button"
+              onClick={ getSearchAPI }
+            >
+              Search
+
+            </button>
           </form>
         </div>
       )}
-
     </section>
   );
 }

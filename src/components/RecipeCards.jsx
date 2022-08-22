@@ -4,8 +4,7 @@ import myContext from '../context/Context';
 import './styles/RecipeCards.css';
 
 function RecipeCards() {
-  const { recipes } = useContext(myContext);
-  const type = 'meal';
+  const { recipes, type } = useContext(myContext);
 
   const LIMIT_RECIPES = 12;
   const recipeType = type === 'meal' ? 'Meal' : 'Drink';
@@ -15,7 +14,7 @@ function RecipeCards() {
   return (
     <div className="recipeCards">
       {
-        recipes
+        recipes && recipes
           .slice(0, LIMIT_RECIPES)
           .map((recipe, index) => (
             <Link

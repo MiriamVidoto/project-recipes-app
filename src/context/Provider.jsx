@@ -9,22 +9,18 @@ function Provider({ children }) {
   const [category, setCategory] = useState('');
   const [searchInput, setSearchInput] = useState('');
   const [recipes, setRecipes] = useState([]);
+  const [type, setType] = useState('meal');
 
   const getSearchAPI = async () => {
     if (category === 'ingredient') {
-      const newRecipes = await getRecipesIngredient(searchInput);
-      const { meals } = newRecipes;
-      setRecipes(meals);
-    }
-    if (category === 'nameSearch') {
-      const newRecipes = await getRecipesName(searchInput);
-      const { meals } = newRecipes;
-      setRecipes(meals);
-    }
-    if (category === 'firstLetter' && searchInput.length === 1) {
-      const newRecipes = await getRecipesfirstLetter(searchInput);
-      const { meals } = newRecipes;
-      setRecipes(meals);
+      const newRecipes = await getRecipesIngredient(type, searchInput);
+      setRecipes(newRecipes);
+    } else if (category === 'nameSearch') {
+      const newRecipes = await getRecipesName(type, searchInput);
+      setRecipes(newRecipes);
+    } else if (category === 'firstLetter' && searchInput.length === 1) {
+      const newRecipes = await getRecipesfirstLetter(type, searchInput);
+      setRecipes(newRecipes);
     } else {
       global.alert('Your search must have only 1 (one) character');
     }
@@ -37,6 +33,9 @@ function Provider({ children }) {
     setCategory,
     searchInput,
     setSearchInput,
+    type,
+    setType,
+    setRecipes,
   };
   return (
     <myContext.Provider value={ value }>

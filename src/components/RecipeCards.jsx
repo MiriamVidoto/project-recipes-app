@@ -1,15 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import myContext from '../context/Context';
 import './styles/RecipeCards.css';
 
 function RecipeCards() {
-  const recipes = [{ idMeal: '52770',
-    strMeal: 'Spaghetti Bolognese',
-    strMealThumb: 'https://www.themealdb.com/images/media/meals/sutysw1468247559.jpg' },
-  { idMeal: '52945',
-    strMeal: 'Kung Pao Chicken',
-    strMealThumb: 'https://www.themealdb.com/images/media/meals/1525872624.jpg' }];
-  const type = 'meal';
+  const { recipes, type } = useContext(myContext);
 
   const LIMIT_RECIPES = 12;
   const recipeType = type === 'meal' ? 'Meal' : 'Drink';
@@ -19,7 +14,7 @@ function RecipeCards() {
   return (
     <div className="recipeCards">
       {
-        recipes
+        recipes && recipes
           .slice(0, LIMIT_RECIPES)
           .map((recipe, index) => (
             <Link

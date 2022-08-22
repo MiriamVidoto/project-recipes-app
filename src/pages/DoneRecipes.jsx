@@ -1,9 +1,11 @@
 import React from 'react';
+import Header from '../components/Header';
 
-function DoneRecipes() {
+function DoneRecipe() {
   return (
-    <div> DoneRecipes</div>
+    <section>
+      <Header headerName="Done Recipes" />
+    </section>
   );
 }
-
-export default DoneRecipes;
+export default DoneRecipe;

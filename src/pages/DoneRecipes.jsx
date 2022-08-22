@@ -4,7 +4,7 @@ import Header from '../components/Header';
 function DoneRecipe() {
   return (
     <section>
-      <Header headerName="Done Recipes" />
+      <Header title="Done Recipes" />
     </section>
   );
 }

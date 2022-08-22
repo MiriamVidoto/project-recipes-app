@@ -6,7 +6,7 @@ import RecipeCards from '../components/RecipeCards';
 function Foods() {
   return (
     <div>
-      <Header headerName="Foods" />
+      <Header title="Foods" />
       <ButtonsCategory />
       <RecipeCards />
     </div>

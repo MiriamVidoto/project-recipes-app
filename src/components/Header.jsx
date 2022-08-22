@@ -33,7 +33,7 @@ function Header({ headerName }) {
           >
             <img
               data-testid="search-top-btn"
-              alt="profileIcon"
+              alt="searchIcon"
               src={ searchIcon }
             />
           </button>

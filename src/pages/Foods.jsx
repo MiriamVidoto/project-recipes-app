@@ -1,5 +1,6 @@
 import React from 'react';
 import ButtonsCategory from '../components/ButtonsCategory';
+import Footer from '../components/Footer';
 import RecipeCards from '../components/RecipeCards';
 
 function Foods() {
@@ -7,6 +8,7 @@ function Foods() {
     <div>
       <ButtonsCategory />
       <RecipeCards />
+      <Footer />
     </div>
   );
 }

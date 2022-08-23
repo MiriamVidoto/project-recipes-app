@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import myContext from '../context/Context';
 import rockGlass from '../images/rockGlass.svg';
 import './style/login.css';
 
 function Login({ history }) {
-  const [email, setEmail] = useState('');
+  const { email, setEmail } = useContext(myContext);
   const [password, setPassword] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
 

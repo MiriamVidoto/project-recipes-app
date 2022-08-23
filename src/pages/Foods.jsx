@@ -19,7 +19,6 @@ function Foods() {
   useEffect(() => {
     setType('meal');
     getDataAPI('meal');
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

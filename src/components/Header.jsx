@@ -21,10 +21,6 @@ function Header({ title }) {
   }, [title, recipes]);
 
   useEffect(() => {
-    recipesOne();
-  }, [recipes]);
-
-  useEffect(() => {
     if (history.location.pathname === '/foods') setType('meal');
     if (history.location.pathname === '/drinks') setType('drinks');
   });
@@ -34,7 +30,7 @@ function Header({ title }) {
       <h2 data-testid="page-title">{title}</h2>
       <button
         type="button"
-        onClick={ () => history.push('profile') }
+        onClick={ () => history.push('/profile') }
       >
         <img
           data-testid="profile-top-btn"

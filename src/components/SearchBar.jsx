@@ -12,12 +12,10 @@ function SearchBar({ showSearchBar }) {
     getSearchAPI,
     setType,
     recipes,
-    recipesOne,
     verifyValue,
   } = useContext(myContext);
 
   useEffect(() => {
-    recipesOne();
     verifyValue();
   }, [recipes]);
 

@@ -76,8 +76,8 @@ export const getDetailsRecipe = async (type, id) => {
     : `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
   const response = await fetch(url);
   const data = await response.json();
-  const categories = type === 'meal'
+  const recipe = type === 'meal'
     ? data.meals
     : data.drinks;
-  return categories;
+  return recipe;
 };

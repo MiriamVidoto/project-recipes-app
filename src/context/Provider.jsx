@@ -13,7 +13,6 @@ function Provider({ children }) {
   const [searchInput, setSearchInput] = useState('');
   const [recipes, setRecipes] = useState([]);
   const [type, setType] = useState('meal');
-  const [email, setEmail] = useState('');
   const history = useHistory();
 
   const verifyValue = () => {
@@ -63,8 +62,6 @@ function Provider({ children }) {
     setRecipes,
     buttonsCategories,
     setButtonsCategories,
-    email,
-    setEmail,
   };
   return (
     <myContext.Provider value={ value }>

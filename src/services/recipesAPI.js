@@ -69,3 +69,15 @@ export const getRecipesfirstLetter = async (type, firstLetter) => {
     : data.drinks;
   return recipes;
 };
+
+export const getDetailsRecipe = async (type, id) => {
+  const url = type === 'meal'
+    ? `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
+    : `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const response = await fetch(url);
+  const data = await response.json();
+  const categories = type === 'meal'
+    ? data.meals
+    : data.drinks;
+  return categories;
+};

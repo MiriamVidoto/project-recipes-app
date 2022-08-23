@@ -1,17 +1,11 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import myContext from '../context/Context';
 import { getRecipes, getRecipesByCategory } from '../services/recipesAPI';
 import './styles/ButtonsCategory.css';
 
 function ButtonsCategory() {
-  const categories = [{ strCategory: 'Beef' },
-    { strCategory: 'Breakfast' },
-    { strCategory: 'Chicken' },
-    { strCategory: 'Dessert' },
-    { strCategory: 'Goat' },
-    { strCategory: 'Lamb' }];
-  const categorySetected = 'Dessert';
-  const type = 'meal';
-
+  const { type, buttonsCategories, setRecipes } = useContext(myContext);
+  const [categorySetected, setCategorySetected] = useState('All');
   const LIMIT_CATEGORIES = 5;
 
   const handleClick = async ({ target }) => {
@@ -19,14 +13,15 @@ function ButtonsCategory() {
     const category = (categorySetected === name || name === 'All')
       ? 'All'
       : name;
-    setCategorySetected(category); // função para setar a categoria selecionada
+    setCategorySetected(category);
 
     if (category === 'All') {
-      const recipes = await getRecipes(type);
-      setRecipes(recipes); // função do context para setar as receitas
+      const newRecipes = await getRecipes(type);
+      setRecipes(newRecipes);
+    } else {
+      const newRecipes = await getRecipesByCategory(type, category);
+      setRecipes(newRecipes);
     }
-    const recipes = await getRecipesByCategory(type, category);
-    setRecipes(recipes); // função do context para setar as receitas
   };
 
   return (
@@ -35,11 +30,13 @@ function ButtonsCategory() {
         type="button"
         data-testid="All-category-filter"
         name="All"
+        onClick={ handleClick }
       >
         All
       </button>
       {
-        categories.slice(0, LIMIT_CATEGORIES)
+        buttonsCategories && buttonsCategories
+          .slice(0, LIMIT_CATEGORIES)
           .map((category) => (
             <button
               key={ category.strCategory }

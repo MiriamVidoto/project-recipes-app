@@ -25,6 +25,8 @@ function Provider({ children }) {
     }
   };
 
+  const [buttonsCategories, setButtonsCategories] = useState([]);
+
   const getSearchAPI = async () => {
     if (category === 'ingredient') {
       const newRecipes = await getRecipesIngredient(type, searchInput);
@@ -51,6 +53,8 @@ function Provider({ children }) {
     type,
     setType,
     setRecipes,
+    buttonsCategories,
+    setButtonsCategories,
   };
   return (
     <myContext.Provider value={ value }>

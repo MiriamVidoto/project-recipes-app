@@ -2,9 +2,9 @@ import React from 'react';
 
 function FoodDetails() {
   return (
-    <div>
+    <h1>
       FoodDetails
-    </div>
+    </h1>
   );
 }
 

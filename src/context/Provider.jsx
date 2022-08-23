@@ -10,6 +10,7 @@ function Provider({ children }) {
   const [searchInput, setSearchInput] = useState('');
   const [recipes, setRecipes] = useState([]);
   const [type, setType] = useState('meal');
+  const [buttonsCategories, setButtonsCategories] = useState([]);
 
   const getSearchAPI = async () => {
     if (category === 'ingredient') {
@@ -36,6 +37,8 @@ function Provider({ children }) {
     type,
     setType,
     setRecipes,
+    buttonsCategories,
+    setButtonsCategories,
   };
   return (
     <myContext.Provider value={ value }>

@@ -1,21 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import propTypes from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import SearchBar from './SearchBar';
 import './styles/Header.css';
+import myContext from '../context/Context';
 
 function Header({ title }) {
   const history = useHistory();
   const [searchIconCondition, setSearchIconCondition] = useState(true);
   const [showSearchBar, setShowSearchBar] = useState(false);
+  const { setType } = useContext(myContext);
 
   useEffect(() => {
     if (title === 'Done Recipes' || title === 'Profile'
     || title === 'Favorite Recipes') return setSearchIconCondition(false);
     setSearchIconCondition(true);
   }, [title]);
+
+  useEffect(() => {
+    if (history.location.pathname === '/foods') setType('meal');
+    if (history.location.pathname === '/drinks') setType('drink');
+  });
 
   return (
     <header>

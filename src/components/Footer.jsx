@@ -6,21 +6,11 @@ import './styles/Footer.css';
 import myContext from '../context/Context';
 
 function Footer() {
-  const { setType, setRecipes } = useContext(myContext);
-
-  const handleClickDrink = () => {
-    setRecipes([]);
-    setType('drink');
-  };
-
-  const handleClickFood = () => {
-    setRecipes([]);
-    setType('meal');
-  };
+  const { setRecipes } = useContext(myContext);
 
   return (
     <div data-testid="footer" className="footer">
-      <Link to="/foods" onClick={ handleClickFood }>
+      <Link to="/foods" onClick={ () => (setRecipes([])) }>
         <img
           src={ mealIcon }
           alt={ mealIcon }
@@ -28,7 +18,7 @@ function Footer() {
           className="imgFooter"
         />
       </Link>
-      <Link to="/drinks" onClick={ handleClickDrink }>
+      <Link to="/drinks" onClick={ () => (setRecipes([])) }>
         <img
           src={ drinkIcon }
           alt={ drinkIcon }

@@ -1,15 +1,30 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { getRecipesfirstLetter,
-  getRecipesIngredient,
-  getRecipesName } from '../services/recipesAPI';
+import { useHistory } from 'react-router-dom';
 import myContext from './Context';
+import {
+  getRecipesfirstLetter,
+  getRecipesIngredient,
+  getRecipesName,
+} from '../services/recipesAPI';
 
 function Provider({ children }) {
   const [category, setCategory] = useState('');
   const [searchInput, setSearchInput] = useState('');
   const [recipes, setRecipes] = useState([]);
   const [type, setType] = useState('meal');
+  const history = useHistory();
+
+  const recipesOne = () => {
+    const pathType = type === 'meal' ? 'foods' : 'drinks';
+    const recipeTypeId = type === 'meal' ? 'idMeal' : 'idDrink';
+    if (recipes.length === 1) {
+      recipes.map((element) => (
+        history.push(`/${pathType}/${element[recipeTypeId]}`)
+      ));
+    }
+  };
+
   const [buttonsCategories, setButtonsCategories] = useState([]);
 
   const getSearchAPI = async () => {
@@ -28,6 +43,7 @@ function Provider({ children }) {
   };
 
   const value = {
+    recipesOne,
     recipes,
     getSearchAPI,
     category,

@@ -18,13 +18,14 @@ function RecipeCards() {
           .slice(0, LIMIT_RECIPES)
           .map((recipe, index) => (
             <Link
-              key={ recipe[recipeTypeId] }
+              key={ index }
               to={ `/${pathType}/${recipe[recipeTypeId]}` }
             >
               <div className="recipeCard" data-testid={ `${index}-recipe-card` }>
                 <img
                   src={ recipe[`str${recipeType}Thumb`] }
                   alt={ recipe[`str${recipeType}`] }
+                  data-testid={ `${index}-card-img` }
                 />
                 <h2 data-testid={ `${index}-card-name` }>
                   {recipe[`str${recipeType}`] }

@@ -11,17 +11,22 @@ function Header({ title }) {
   const history = useHistory();
   const [searchIconCondition, setSearchIconCondition] = useState(true);
   const [showSearchBar, setShowSearchBar] = useState(false);
-  const { setType } = useContext(myContext);
+  const { setType, recipes, recipesOne } = useContext(myContext);
 
   useEffect(() => {
     if (title === 'Done Recipes' || title === 'Profile'
     || title === 'Favorite Recipes') return setSearchIconCondition(false);
     setSearchIconCondition(true);
-  }, [title]);
+    recipesOne();
+  }, [title, recipes]);
+
+  useEffect(() => {
+    recipesOne();
+  }, [recipes]);
 
   useEffect(() => {
     if (history.location.pathname === '/foods') setType('meal');
-    if (history.location.pathname === '/drinks') setType('drink');
+    if (history.location.pathname === '/drinks') setType('drinks');
   });
 
   return (

@@ -15,11 +15,11 @@ function CardRecomend({ type }) {
 
   useEffect(() => {
     getRecomendsAPI();
-    console.log(recomends);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div>
+    <>
       {
         recomends.slice(0, LIMIT_RECIPES)
           .map((recipe, index) => (
@@ -33,11 +33,13 @@ function CardRecomend({ type }) {
                 alt={ recipe[`str${recipeType}`] }
               />
               <p>{recipe.strCategory}</p>
-              <h4>{recipe[`str${recipeType}`] }</h4>
+              <h4 data-testid={ `${index}recomendation-title` }>
+                {recipe[`str${recipeType}`] }
+              </h4>
             </div>
           ))
       }
-    </div>
+    </>
   );
 }
 

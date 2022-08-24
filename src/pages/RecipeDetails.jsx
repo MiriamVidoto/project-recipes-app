@@ -83,6 +83,13 @@ function RecipeDetails({ type }) {
                 data-testid="video"
               />
             }
+            <button
+              type="button"
+              data-testid="start-recipe-btn"
+              className="btn-start"
+            >
+              Start Recipe
+            </button>
             <section className="container-recomend">
               <CardRecomend type={ type } />
             </section>

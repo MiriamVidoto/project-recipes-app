@@ -1,5 +1,13 @@
 .container-recomend {
-  display: grid;
-  height: 100vh;
-  place-items: center;
+  display: flex;
+  flex-direction: row;
+  height: 25vh;
+  max-width: 100vh;
+  overflow-x: scroll;
+  scroll-snap-type: mandatory;
+}
+
+.btn-start {
+  bottom: 0;
+  position: fixed;
 }

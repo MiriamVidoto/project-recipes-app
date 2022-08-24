@@ -4,7 +4,7 @@ function RecipeInProgress() {
   return (
     <div>
 
-      {
+      {/*       {
         getInfos.map((element) => (
           <div key={ element.idMeal }>
             <img
@@ -59,7 +59,7 @@ function RecipeInProgress() {
 
         ))
       }
-
+ */}
     </div>
   );
 }

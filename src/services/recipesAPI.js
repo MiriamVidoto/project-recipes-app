@@ -83,12 +83,13 @@ export const getDetailsRecipe = async (type, id) => {
 };
 
 export const getRecomends = async (type) => {
-  const url = type === 'meal'
+  const url = type === 'drinks'
     ? 'https://www.themealdb.com/api/json/v1/1/search.php?s='
     : 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
   const response = await fetch(url);
   const data = await response.json();
-  const recipe = type === 'meal'
+  console.log(data);
+  const recipe = type === 'drinks'
     ? data.meals
     : data.drinks;
   return recipe;

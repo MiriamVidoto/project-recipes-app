@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import CardRecomend from '../components/CardRecomend';
 import { getDetailsRecipe } from '../services/recipesAPI';
+import './style/RecipeDetails.css';
 
 function RecipeDetails({ type }) {
   // const history = useHistory();
@@ -29,8 +30,6 @@ function RecipeDetails({ type }) {
   const amount = recipe.length !== 0 ? Object.keys(recipe[0])
     .filter((key) => key.includes('strMeasure'))
     : [];
-
-  console.log(amount);
 
   const youtubeVideo = () => {
     const url = recipe[0].strYoutube;
@@ -84,7 +83,7 @@ function RecipeDetails({ type }) {
                 data-testid="video"
               />
             }
-            <section>
+            <section className="container-recomend">
               <CardRecomend />
             </section>
           </>

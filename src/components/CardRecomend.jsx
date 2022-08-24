@@ -33,7 +33,7 @@ function CardRecomend({ type }) {
                 alt={ recipe[`str${recipeType}`] }
               />
               <p>{recipe.strCategory}</p>
-              <h4 data-testid={ `${index}recomendation-title` }>
+              <h4 data-testid={ `${index}-recomendation-title` }>
                 {recipe[`str${recipeType}`] }
               </h4>
             </div>

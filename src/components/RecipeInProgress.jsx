@@ -49,17 +49,9 @@ function RecipeInProgress() {
         ))
       }
       <p>estou aqui</p>
-      {
-        getStepRecipe.map((element) => (
-          <div key={ element.idMeal }>
-            <p data-testid="recipe-category">
-              {element.strCategory}
-            </p>
-          </div>
 
-        ))
-      }
- */}
+      {Object.keys(getStepRecipe.map((element) => element[0]))}
+
     </div>
   );
 }

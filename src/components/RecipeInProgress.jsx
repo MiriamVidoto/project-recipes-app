@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 function RecipeInProgress() {
   // falta fazer a logica de renderização de ingredientes
 
   const getrecipesInProgress = localStorage.getItem('inProgressRecipes');
+
+  useEffect(() => {
+    localStorage.getItem('inProgressRecipes');
+  });
+
   return (
     <div>
       {

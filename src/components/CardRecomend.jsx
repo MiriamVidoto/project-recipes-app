@@ -1,10 +1,9 @@
-import React, { useState, useContext, useEffect } from 'react';
-import myContext from '../context/Context';
+import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 import { getRecomends } from '../services/recipesAPI';
 import './styles/CardRecomend.css';
 
-function CardRecomend() {
-  const { type } = useContext(myContext);
+function CardRecomend({ type }) {
   const [recomends, setRecomends] = useState([]);
   const LIMIT_RECIPES = 6;
   const recipeType = type === 'drinks' ? 'Meal' : 'Drink';
@@ -41,5 +40,9 @@ function CardRecomend() {
     </div>
   );
 }
+
+CardRecomend.propTypes = {
+  type: PropTypes.string.isRequired,
+};
 
 export default CardRecomend;

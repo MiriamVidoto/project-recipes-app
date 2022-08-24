@@ -84,7 +84,7 @@ function RecipeDetails({ type }) {
               />
             }
             <section className="container-recomend">
-              <CardRecomend />
+              <CardRecomend type={ type } />
             </section>
           </>
         )

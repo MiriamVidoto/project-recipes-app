@@ -1,4 +1,5 @@
 import React from 'react';
+import shareIcon from '../images/shareIcon.svg';
 
 function CardDoneRecipes() {
   const doneRecipes = [];
@@ -13,7 +14,7 @@ function CardDoneRecipes() {
             <h2 data-testid={ `${index}-horizontal-name` }>Name</h2>
             <p data-testid={ `${index}-horizontal-done-date` }>Data</p>
             <img
-              src="src/images/shareIcon.svg"
+              src={ shareIcon }
               alt=""
               data-testid={ `${index}-horizontal-share-btn` }
             />

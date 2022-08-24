@@ -1,12 +1,11 @@
 import PropTypes from 'prop-types';
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import CardRecomend from '../components/CardRecomend';
 import myContext from '../context/Context';
 import { getDetailsRecipe } from '../services/recipesAPI';
 
 function FoodDetails({ match }) {
-  const { setType } = useContext(myContext);
-  const [recipe, setRecipe] = useState();
+  const { setType, recipe, setRecipe } = useContext(myContext);
   const { id } = match.params;
 
   const getRecipeAPI = async () => {
@@ -17,7 +16,8 @@ function FoodDetails({ match }) {
   useEffect(() => {
     setType('meal');
     getRecipeAPI();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const ingredientes = recipe ? [
@@ -42,6 +42,13 @@ function FoodDetails({ match }) {
     recipe[0].strIngredient19,
     recipe[0].strIngredient20,
   ] : [];
+
+  const youtubeVideo = () => {
+    const url = recipe[0].strYoutube;
+    const index = url.indexOf('=');
+    const youtubeCode = url.slice(index + 1);
+    return `https://www.youtube.com/embed/${youtubeCode}`;
+  };
 
   return (
     <div>
@@ -70,8 +77,12 @@ function FoodDetails({ match }) {
             <h3>Instuctions</h3>
             <p data-testid="instructions">{recipe[0].strInstructions}</p>
             <iframe
-              src={ recipe[0].strYoutube }
-              title="video"
+              width="560"
+              height="315"
+              src={ youtubeVideo() }
+              title="YouTube video player"
+              frameBorder="0"
+              allowFullScreen
             />
             <section>
               <CardRecomend />

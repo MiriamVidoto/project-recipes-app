@@ -66,10 +66,10 @@ function DrinkDetails({ match }) {
                     </li>
                   )))}
             </ul>
-            <h3>Instuctions</h3>
+            <h3>Instuctions:</h3>
             <p data-testid="instructions">{recipe[0].strInstructions}</p>
             <section>
-              <CardRecomend data-testid={ `${index}-recomendation-card` } />
+              <CardRecomend />
             </section>
           </>
         )

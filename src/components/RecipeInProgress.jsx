@@ -65,15 +65,18 @@ function RecipeInProgress({ type }) {
             <ul>
               {
                 listIngredients.map((ingrediente, index) => (
+
                   <li
                     key={ index }
                     data-testid={ `${index}-ingredient-step` }
                     id="li-ingredients"
                   >
+                    <input type="checkbox" />
                     {recipe[0][ingrediente]}
                     {' - '}
                     {recipe[0][amount[index]]}
                   </li>
+
                 ))
               }
             </ul>

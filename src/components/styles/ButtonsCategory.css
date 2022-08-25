@@ -6,8 +6,10 @@
 }
 
 .buttonsCategory button {
+  background-color: rgba(174, 65, 65, 0.462);
   border: none;
   border-radius: 4px;
-  margin-bottom: 5px;
-  width: 100px;
+  color: rgba(61, 0, 0, 0.91);
+  margin-bottom: 10px;
+  width: 30%;
 }

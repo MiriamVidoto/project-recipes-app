@@ -1,0 +1,54 @@
+.card-done-recipes {
+  background-color: rgba(255, 255, 255, 0.564);
+  border-radius: 5px;
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.342);
+  display: flex;
+  height: 26vh;
+  margin: 5px;
+}
+
+
+.card-done-recipes h3 {
+  font-size: 1.2em;
+  font-weight: 900;
+}
+
+.card-done-recipes ul li {
+  background-color: rgba(174, 65, 65, 0.462);
+  border-radius: 8px;
+  color: rgba(61, 0, 0, 0.91);
+  display: inline-block;
+  font-size: 0.9em;
+  list-style: none;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.thumb {
+  width: 25vh;
+}
+
+.container-done-recipes {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5px;
+}
+
+.share {
+  display: flex;
+  justify-content: space-around;
+}
+
+.share p {
+  align-self: flex-start;
+  color: rgba(0, 0, 0, 0.416);
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
+.share-icon {
+  margin: 10px;
+  width: 10%;
+}

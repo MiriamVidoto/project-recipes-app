@@ -1,0 +1,20 @@
+.done-recipes {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.done-recipes-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+  width: 40vh;
+}
+
+.done-recipes-buttons button {
+  background-color: rgba(174, 65, 65, 0.462);
+  border: none;
+  border-radius: 4px;
+  color: rgba(61, 0, 0, 0.91);
+  width: 30%;
+}

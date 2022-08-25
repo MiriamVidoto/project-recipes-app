@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { getDetailsRecipe } from '../services/recipesAPI';
 
 function RecipeInProgress({ type }) {
+  const { id } = useParams();
   const recipeType = type === 'meal' ? 'Meal' : 'Drink';
 
-  const [id, setID] = useState('');
+  /* const [id, setID] = useState(); */
   const [recipe, setRecipe] = useState([]);
 
   const getRecipeAPI = async () => {
@@ -21,20 +23,10 @@ function RecipeInProgress({ type }) {
     .filter((key) => key.includes('strMeasure'))
     : [];
 
-  const getIdToLocalStorage = () => {
-    const idLocalSotorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    let idStorage = '';
-    if (type === 'cocktails') idStorage = idLocalSotorage.cocktails;
-    if (type === 'meal') idStorage = idLocalSotorage.meals;
-    const idTolocalString = Object.keys(idStorage).toString();
-    setID(idTolocalString);
-  };
-
   useEffect(() => {
-    getIdToLocalStorage();
     getRecipeAPI();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, []);
 
   return (
 

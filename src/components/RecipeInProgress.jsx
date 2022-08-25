@@ -1,29 +1,61 @@
-import React from 'react';
+import PropTypes, { element } from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import { getDetailsRecipe } from '../services/recipesAPI';
 
-function RecipeInProgress() {
+function RecipeInProgress({ type }) {
+  const recipeType = type === 'meal' ? 'Meal' : 'Drink';
+
+  const [id, setID] = useState('');
+  const [recipe, setRecipe] = useState([]);
+  const [ingredientes, setIngredientes] = useState([]);
+
+  const getRecipeAPI = async () => {
+    const newRecipe = await getDetailsRecipe(type, id);
+    setRecipe(newRecipe);
+  };
+
+  const getIdToLocalStorage = () => {
+    const idLocalSotorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    let idStorage = '';
+    if (type === 'cocktails') idStorage = idLocalSotorage.cocktails;
+    if (type === 'meal') idStorage = idLocalSotorage.meals;
+    const idTolocalString = Object.keys(idStorage).toString();
+    setID(idTolocalString);
+    setIngredientes(idStorage);
+  };
+
+  const mapIngrediente = () => { ingredientes.map((elements) => console.log(elements)); };
+
+  useEffect(() => {
+    getIdToLocalStorage();
+    getRecipeAPI();
+    mapIngrediente();
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
+
   return (
-    <div>
 
-      {/*       {
-        getInfos.map((element) => (
-          <div key={ element.idMeal }>
+    <div>
+      {
+        recipe.length !== 0
+        && (
+          <>
             <img
-              alt={ element.strMeal }
+              src={ recipe[0][`str${recipeType}Thumb`] }
+              alt="Food"
               data-testid="recipe-photo"
-              src={ element.strMealThumb }
             />
-            <h2
-              key={ element.idMeal }
+            <h3
               data-testid="recipe-title"
             >
-              {element.strMeal}
-            </h2>
+              {recipe[0][`str${recipeType}`]}
+            </h3>
             <button
               type="button"
               data-testid="share-btn"
             >
               Compartilhar
-
             </button>
             <button
               type="button"
@@ -31,29 +63,29 @@ function RecipeInProgress() {
             >
               Favoritar
             </button>
-            <p data-testid="recipe-category">
-              {element.strCategory}
-            </p>
-            <p data-testid="recipe-category">
-              {element.strInstructions}
-            </p>
-
-            <button
-              type="button"
-              data-testid="finish-recipe-btn"
-            >
-              Finalizar Receitas
-            </button>
-          </div>
-
-        ))
+            <p data-testid="recipe-category">{recipe[0].strCategory}</p>
+            {/*             {
+              ingredientes.map((ingrediente, index) => (
+                <li
+                  key={ index }
+                  data-testid={ `${index}-ingredient-step` }
+                >
+                  {' '}
+                  {ingredientes.ingrediente}
+                  {' '}
+                </li>
+              ))
+            } */}
+          </>
+        )
       }
-      <p>estou aqui de novo</p>
-
-      {Object.keys(getStepRecipe.map((element) => element[0]))}
 
     </div>
   );
 }
+
+RecipeInProgress.propTypes = {
+  type: PropTypes.string,
+}.isRequired;
 
 export default RecipeInProgress;

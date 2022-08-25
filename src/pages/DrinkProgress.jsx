@@ -4,7 +4,7 @@ import RecipeInProgress from '../components/RecipeInProgress';
 function DrinkProgress() {
   return (
     <div>
-      <RecipeInProgress />
+      <RecipeInProgress type="cocktails" />
     </div>
   );
 }

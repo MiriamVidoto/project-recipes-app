@@ -17,6 +17,7 @@ function SearchBar({ showSearchBar }) {
 
   useEffect(() => {
     verifyValue();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recipes]);
 
   useEffect(() => {

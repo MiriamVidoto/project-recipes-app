@@ -48,7 +48,7 @@ function RecipeInProgress() {
 
         ))
       }
-      <p>estou aqui</p>
+      <p>estou aqui de novo</p>
 
       {Object.keys(getStepRecipe.map((element) => element[0]))}
 

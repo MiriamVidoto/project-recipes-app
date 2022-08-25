@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import CardRecomend from '../components/CardRecomend';
 import { getDetailsRecipe } from '../services/recipesAPI';
+import './style/RecipeDetails.css';
 
 function RecipeDetails({ type }) {
   // const history = useHistory();
@@ -38,7 +39,7 @@ function RecipeDetails({ type }) {
   };
 
   return (
-    <div>
+    <div className="all-page">
       {
         recipe.length !== 0
         && (
@@ -47,14 +48,26 @@ function RecipeDetails({ type }) {
               src={ recipe[0][`str${recipeType}Thumb`] }
               alt="Food"
               data-testid="recipe-photo"
+              className="img-recipe"
             />
-            <h3 data-testid="recipe-title">{recipe[0][`str${recipeType}`]}</h3>
-            <p data-testid="recipe-category">{recipe[0].strCategory}</p>
+            <h3
+              data-testid="recipe-title"
+              className="title-recipe"
+            >
+              {recipe[0][`str${recipeType}`]}
+            </h3>
+            <p
+              data-testid="recipe-category"
+              className="category-recipe"
+            >
+              {recipe[0].strCategory}
+            </p>
+            />
             {
               type === 'drinks'
               && <p data-testid="recipe-category">{recipe[0].strAlcoholic}</p>
             }
-            <h3>Ingredients</h3>
+            <h3>Ingredients:</h3>
             <ul>
               {
                 ingredientes.map((ingrediente, index) => (
@@ -69,13 +82,18 @@ function RecipeDetails({ type }) {
                 ))
               }
             </ul>
-            <h3>Instuctions</h3>
-            <p data-testid="instructions">{recipe[0].strInstructions}</p>
+            <h3>Instructions</h3>
+            <p
+              data-testid="instructions"
+              className="instructions-recipe"
+            >
+              {recipe[0].strInstructions}
+            </p>
             {
               type === 'meal'
               && <iframe
-                width="560"
-                height="315"
+                width="510"
+                height="300"
                 src={ youtubeVideo() }
                 title="YouTube video player"
                 frameBorder="0"

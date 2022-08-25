@@ -58,18 +58,30 @@ function RecipeInProgress({ type }) {
               Favoritar
             </button>
             <p data-testid="recipe-category">{recipe[0].strCategory}</p>
-            {
-              ingredientes.map((ingrediente, index) => (
-                <li
-                  key={ index }
-                  data-testid={ `${index}-ingredient-step` }
-                >
-                  {recipe[0][ingrediente]}
-                  {' - '}
-                  {recipe[0][amount[index]]}
-                </li>
-              ))
-            }
+            { type === 'meal'
+              && ingredientes.filter((element) => recipe[0][element].length !== 0)
+                .map((ingrediente, index) => (
+                  <li
+                    key={ index }
+                    data-testid={ `${index}-ingredient-step` }
+                  >
+                    {recipe[0][ingrediente]}
+                    {' - '}
+                    {recipe[0][amount[index]]}
+                  </li>
+                ))}
+            { type === 'cocktails'
+              && ingredientes.filter((element) => recipe[0][element] !== null)
+                .map((ingredient, index) => (
+                  <li
+                    key={ index }
+                    data-testid={ `${index}-ingredient-step` }
+                  >
+                    {recipe[0][ingredient]}
+                    {' - '}
+                    {recipe[0][amount[index]]}
+                  </li>
+                ))}
             <h3>Instructions</h3>
             <p
               data-testid="instructions"

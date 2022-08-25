@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import CardRecomend from '../components/CardRecomend';
 import { getDetailsRecipe } from '../services/recipesAPI';
-import './style/RecipeDetails.css';
 
 function RecipeDetails({ type }) {
   // const history = useHistory();
@@ -83,6 +82,13 @@ function RecipeDetails({ type }) {
                 data-testid="video"
               />
             }
+            <button
+              type="button"
+              data-testid="start-recipe-btn"
+              className="btn-start"
+            >
+              Start Recipe
+            </button>
             <section className="container-recomend">
               <CardRecomend type={ type } />
             </section>

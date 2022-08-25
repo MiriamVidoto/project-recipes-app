@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { getRecomends } from '../services/recipesAPI';
+import './styles/CardRecomend.css';
 
 function CardRecomend({ type }) {
   const [recomends, setRecomends] = useState([]);

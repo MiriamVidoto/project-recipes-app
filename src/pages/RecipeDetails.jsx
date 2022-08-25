@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-// import { useHistory } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import CardRecomend from '../components/CardRecomend';
@@ -7,8 +6,8 @@ import { getDetailsRecipe } from '../services/recipesAPI';
 import './style/RecipeDetails.css';
 
 function RecipeDetails({ type }) {
-  // const history = useHistory();
   const [recipe, setRecipe] = useState([]);
+  const [showBtn, setShowBtn] = useState(true);
   const { id } = useParams();
 
   const recipeType = type === 'meal' ? 'Meal' : 'Drink';
@@ -18,8 +17,17 @@ function RecipeDetails({ type }) {
     setRecipe(newRecipe);
   };
 
+  const btnCondition = () => {
+    const doneRecipes = localStorage.getItem('doneRecipes');
+    if (doneRecipes) {
+      const condition = doneRecipes.json().some((element) => element.id === id);
+      setShowBtn(!condition);
+    }
+  };
+
   useEffect(() => {
     getRecipeAPI();
+    btnCondition();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -36,6 +44,21 @@ function RecipeDetails({ type }) {
     const index = url.indexOf('=');
     const youtubeCode = url.slice(index + 1);
     return `https://www.youtube.com/embed/${youtubeCode}`;
+  };
+
+  const handleClick = () => {
+    const ingred = ingredientes.map((element) => recipe[0][element]);
+    const obj = {
+      [id]: ingred,
+    };
+    console.log(obj);
+    const teste = localStorage.getItem('meals')
+      ? localStorage.getItem('meals') : null;
+    if (type === 'meal') {
+      localStorage.setItem('meals', [teste, JSON.stringify(obj)]);
+    } else {
+      localStorage.setItem('cocktails', [teste, JSON.stringify(obj)]);
+    }
   };
 
   return (
@@ -73,6 +96,7 @@ function RecipeDetails({ type }) {
                   <li
                     key={ index }
                     data-testid={ `${index}-ingredient-name-and-measure` }
+                    id="li-ingredients"
                   >
                     {recipe[0][ingrediente]}
                     {' - '}
@@ -99,13 +123,19 @@ function RecipeDetails({ type }) {
                 data-testid="video"
               />
             }
-            <button
-              type="button"
-              data-testid="start-recipe-btn"
-              className="btn-start"
-            >
-              Start Recipe
-            </button>
+            {
+              showBtn
+              && (
+                <button
+                  type="button"
+                  data-testid="start-recipe-btn"
+                  className="btn-start"
+                  onClick={ handleClick }
+                >
+                  Start Recipe
+                </button>
+              )
+            }
             <section className="container-recomend">
               <CardRecomend type={ type } />
             </section>

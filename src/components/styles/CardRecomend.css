@@ -1,9 +1,28 @@
 .container-card {
-  border: 1px solid red;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.212);
+  border-radius: 5px;
+  box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.6);
   display: flex;
   flex-direction: column;
-  margin: 50px;
-  width: 50vh;
+  justify-content: space-between;
+  margin: 5%;
+  min-width: 40%;
 }
 
+.img-scroll {
+  border-radius: 5px;
+  box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.6);
+  height: 25vh;
+  margin: 10px 15px;
+  width: 100%;
+}
 
+.category-scroll {
+  font-weight: 600;
+}
+
+.title-scroll {
+  color: black;
+  margin-top: -10px;
+}

@@ -4,31 +4,31 @@ import shareIcon from '../images/shareIcon.svg';
 import './styles/CardDoneRecipes.css';
 
 function CardDoneRecipes() {
-  const doneRecipes = [
-    { id: '52771',
-      type: 'foods',
-      nationality: 'Italian',
-      category: 'Vegetarian',
-      alcoholicOrNot: '',
-      name: 'Spicy Arrabiata Penne',
-      image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
-      doneDate: '25/08/2022',
-      tags: ['Pasta', 'Curry', 'teste'],
-    },
-    { id: '178319',
-      type: 'drinks',
-      nationality: '',
-      category: 'Cocktail',
-      alcoholicOrNot: 'Alcoholic',
-      name: 'Aquamarine',
-      image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
-      doneDate: '24/08/2022',
-      tags: [],
-    }];
+  // const doneRecipes = [
+  //   { id: '52771',
+  //     type: 'foods',
+  //     nationality: 'Italian',
+  //     category: 'Vegetarian',
+  //     alcoholicOrNot: '',
+  //     name: 'Spicy Arrabiata Penne',
+  //     image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
+  //     doneDate: '25/08/2022',
+  //     tags: ['Pasta', 'Curry', 'teste'],
+  //   },
+  //   { id: '178319',
+  //     type: 'drinks',
+  //     nationality: '',
+  //     category: 'Cocktail',
+  //     alcoholicOrNot: 'Alcoholic',
+  //     name: 'Aquamarine',
+  //     image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
+  //     doneDate: '24/08/2022',
+  //     tags: [],
+  //   }];
 
-  // const doneRecipes = localStorage.getItem('doneRecipes')
-  //   ? JSON.parse(localStorage.getItem('doneRecipes'))
-  //   : [];
+  const doneRecipes = localStorage.getItem('doneRecipes')
+    ? JSON.parse(localStorage.getItem('doneRecipes'))
+    : [];
 
   const LIMIT_TAGS = 2;
 

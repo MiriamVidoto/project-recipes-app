@@ -1,4 +1,4 @@
-import PropTypes, { element } from 'prop-types';
+import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { getDetailsRecipe } from '../services/recipesAPI';
 
@@ -7,12 +7,19 @@ function RecipeInProgress({ type }) {
 
   const [id, setID] = useState('');
   const [recipe, setRecipe] = useState([]);
-  const [ingredientes, setIngredientes] = useState([]);
 
   const getRecipeAPI = async () => {
     const newRecipe = await getDetailsRecipe(type, id);
     setRecipe(newRecipe);
   };
+
+  const ingredientes = recipe.length !== 0 ? Object.keys(recipe[0])
+    .filter((key) => key.includes('strIngredient'))
+    : [];
+
+  const amount = recipe.length !== 0 ? Object.keys(recipe[0])
+    .filter((key) => key.includes('strMeasure'))
+    : [];
 
   const getIdToLocalStorage = () => {
     const idLocalSotorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
@@ -21,16 +28,11 @@ function RecipeInProgress({ type }) {
     if (type === 'meal') idStorage = idLocalSotorage.meals;
     const idTolocalString = Object.keys(idStorage).toString();
     setID(idTolocalString);
-    setIngredientes(idStorage);
   };
-
-  const mapIngrediente = () => { ingredientes.map((elements) => console.log(elements)); };
 
   useEffect(() => {
     getIdToLocalStorage();
     getRecipeAPI();
-    mapIngrediente();
-
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
@@ -64,18 +66,30 @@ function RecipeInProgress({ type }) {
               Favoritar
             </button>
             <p data-testid="recipe-category">{recipe[0].strCategory}</p>
-            {/*             {
+            {
               ingredientes.map((ingrediente, index) => (
                 <li
                   key={ index }
                   data-testid={ `${index}-ingredient-step` }
                 >
-                  {' '}
-                  {ingredientes.ingrediente}
-                  {' '}
+                  {recipe[0][ingrediente]}
+                  {' - '}
+                  {recipe[0][amount[index]]}
                 </li>
               ))
-            } */}
+            }
+            <h3>Instructions</h3>
+            <p
+              data-testid="instructions"
+            >
+              {recipe[0].strInstructions}
+            </p>
+            <button
+              type="button"
+              data-testid="finish-recipe-btn"
+            >
+              Finalizar Receita
+            </button>
           </>
         )
       }

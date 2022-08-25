@@ -25,7 +25,7 @@ function CardRecomend({ type }) {
           .map((recipe, index) => (
             <div
               key={ index }
-              data-testid={ `${index}recomendation-card` }
+              data-testid={ `${index}-recomendation-card` }
               className="container-card"
             >
               <img

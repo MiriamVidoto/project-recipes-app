@@ -15,10 +15,16 @@ function Provider({ children }) {
   const [type, setType] = useState('meal');
   const history = useHistory();
 
+  const verifyValue = () => {
+    if (recipes === null) {
+      global.alert('Sorry, we haven\'t found any recipes for these filters.');
+    }
+  };
+
   const recipesOne = () => {
     const pathType = type === 'meal' ? 'foods' : 'drinks';
     const recipeTypeId = type === 'meal' ? 'idMeal' : 'idDrink';
-    if (recipes.length === 1) {
+    if (recipes !== null && recipes.length === 1) {
       recipes.map((element) => (
         history.push(`/${pathType}/${element[recipeTypeId]}`)
       ));
@@ -43,6 +49,7 @@ function Provider({ children }) {
   };
 
   const value = {
+    verifyValue,
     recipesOne,
     recipes,
     getSearchAPI,

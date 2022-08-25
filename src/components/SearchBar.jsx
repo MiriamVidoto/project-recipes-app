@@ -1,14 +1,30 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import propTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import myContext from '../context/Context';
 
 function SearchBar({ showSearchBar }) {
+  const history = useHistory();
   const {
     setCategory,
     searchInput,
     setSearchInput,
     getSearchAPI,
+    setType,
+    recipes,
+    recipesOne,
+    verifyValue,
   } = useContext(myContext);
+
+  useEffect(() => {
+    recipesOne();
+    verifyValue();
+  }, [recipes]);
+
+  useEffect(() => {
+    if (history.location.pathname === '/foods') setType('meal');
+    if (history.location.pathname === '/drinks') setType('drinks');
+  });
 
   return (
     <section>

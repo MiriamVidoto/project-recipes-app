@@ -8,6 +8,7 @@ import './style/RecipeDetails.css';
 function RecipeDetails({ type }) {
   const [recipe, setRecipe] = useState([]);
   const [showBtn, setShowBtn] = useState(true);
+  const [nameButton, setNameButton] = useState('Start Recipe');
   const { id } = useParams();
   const history = useHistory();
 
@@ -28,9 +29,21 @@ function RecipeDetails({ type }) {
     }
   };
 
+  const buttonNameCondition = () => {
+    if (localStorage.getItem('inProgressRecipes')) {
+      const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+      const verification = Object.keys(inProgress[localStorageType])
+        .some((e) => e === id);
+      if (verification) {
+        setNameButton('Continue Recipe');
+      }
+    }
+  };
+
   useEffect(() => {
     getRecipeAPI();
     btnCondition();
+    buttonNameCondition();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -136,7 +149,7 @@ function RecipeDetails({ type }) {
                   className="btn-start"
                   onClick={ handleClick }
                 >
-                  Start Recipe
+                  { nameButton }
                 </button>
               )
             }

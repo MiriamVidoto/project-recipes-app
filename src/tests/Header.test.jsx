@@ -1,57 +1,39 @@
 import React from 'react';
-import { getByTestId, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from './helpers/renderWithRouter';
 import App from '../App';
 
-const searchInputId = 'search-input';
-const userBtnId = 'profile-top-btn';
-const showSearchBtnId = 'search-top-btn';
-
 describe('Testando o componente Header', () => {
-  test('Testando compoentes em tela', () => {
-    renderWithRouter(<App />);
-    const emailInput = screen.getByTestId("email-input");
-    const passwordInput = screen.getByTestId("password-input");
-    const buttonLogin = screen.getByTestId("login-submit-btn");
-    userEvent.type(emailInput, 'teste@email.com');
-    userEvent.type(passwordInput, '1234567');
-    userEvent.click(buttonLogin)
-    const header = screen.getByTestId('page-title');
-    const profileBtn = screen.getByTestId(userBtnId);
-    const showSearchBtn = screen.getByTestId(showSearchBtnId);
+  test('Testando compoentes em tela', async () => {
+    const { history } = renderWithRouter(<App />);
+    history.push('/foods');
+    const { location: { pathname } } = history;
+    expect(pathname).toBe('/foods');
+    const header = await screen.findByTestId('page-title');
+    const profileBtn = await screen.findByTestId('profile-top-btn');
+    const showSearchBtn = await screen.findByTestId('search-top-btn');
     expect(header).toBeInTheDocument();
     expect(profileBtn).toBeInTheDocument();
     expect(showSearchBtn).toBeInTheDocument();
   });
 
-  test('Testa se quando clicar no profile é redirecionado pra pagina correta', () => {
+  test('Testa se quando clicar no profile é redirecionado pra pagina correta', async () => {
     const { history } = renderWithRouter(<App />);
-    const emailInput = screen.getByTestId("email-input");
-    const passwordInput = screen.getByTestId("password-input");
-    const buttonLogin = screen.getByTestId("login-submit-btn");
-    userEvent.type(emailInput, 'teste@email.com');
-    userEvent.type(passwordInput, '1234567');
-    userEvent.click(buttonLogin)
-    const profileBtn = screen.getByTestId(userBtnId);
+    history.push('/foods');
+    const profileBtn = await screen.findByTestId('profile-top-btn');
     userEvent.click(profileBtn);
     expect(history.location.pathname).toBe('/profile');
   });
 
-  test('Clica no botao search e verifica se habilita a barra de pesquisa ', () => {
+  test('Clica no botao search e verifica se habilita a barra de pesquisa ', async () => {
     const { history } = renderWithRouter(<App />);
-    const emailInput = screen.getByTestId("email-input");
-    const passwordInput = screen.getByTestId("password-input");
-    const buttonLogin = screen.getByTestId("login-submit-btn");
-    userEvent.type(emailInput, 'teste@email.com');
-    userEvent.type(passwordInput, '1234567');
-    userEvent.click(buttonLogin)
-    const showSearchBtn = screen.getByTestId(showSearchBtnId);
+    history.push('/foods');
+    const showSearchBtn = await screen.findByTestId('search-top-btn');
     userEvent.click(showSearchBtn)
-    const searchInput = screen.getByTestId('search-input');
+    const searchInput = await screen.findByTestId('search-input');
     expect(searchInput).toBeInTheDocument();
     userEvent.click(showSearchBtn)
     expect(searchInput).not.toBeInTheDocument();
   });
-
 });

@@ -1,9 +1,34 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import './styles/CardDoneRecipes.css';
 
 function CardDoneRecipes() {
-  const doneRecipes = [{ idMeal: '52771', strMeal: 'Spicy Arrabiata Penne', strCategory: 'Vegetarian', strArea: 'Italian', strMealThumb: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg', strTags: 'Pasta,Curry,teste', data: '25/08/2022', type: 'Meal' }, { idDrink: '178319', strDrink: 'Aquamarine', strCategory: 'Cocktail', strAlcoholic: 'Alcoholic', strDrinkThumb: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg', data: '24/08/2022', type: 'Drink' }];
+  const doneRecipes = [
+    { id: '52771',
+      type: 'foods',
+      nationality: 'Italian',
+      category: 'Vegetarian',
+      alcoholicOrNot: '',
+      name: 'Spicy Arrabiata Penne',
+      image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
+      doneDate: '25/08/2022',
+      tags: ['Pasta', 'Curry', 'teste'],
+    },
+    { id: '178319',
+      type: 'drinks',
+      nationality: '',
+      category: 'Cocktail',
+      alcoholicOrNot: 'Alcoholic',
+      name: 'Aquamarine',
+      image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
+      doneDate: '24/08/2022',
+      tags: [],
+    }];
+
+  // const doneRecipes = localStorage.getItem('doneRecipes')
+  //   ? JSON.parse(localStorage.getItem('doneRecipes'))
+  //   : [];
 
   const LIMIT_TAGS = 2;
 
@@ -12,27 +37,27 @@ function CardDoneRecipes() {
       {
         doneRecipes.map((element, index) => (
           <div className="card-done-recipes" key={ index }>
-            <img
-              src={ element[`str${element.type}Thumb`] }
-              alt={ element[`str${element.type}`] }
-              data-testid={ `${index}-horizontal-image ` }
-              className="thumb"
-            />
+            <Link to={ `/${element.type}/${element.id}` }>
+              <img
+                src={ element.image }
+                alt={ element.name }
+                data-testid={ `${index}-horizontal-image` }
+                className="thumb"
+              />
+            </Link>
             <div className="container-done-recipes">
               <div className="share">
                 {
-                  element.type === 'Meal' ? (
+                  element.type === 'foods' ? (
                     <p data-testid={ `${index}-horizontal-top-text` }>
-                      { element.strCategory }
-                      {' - '}
-                      { element.strArea }
+                      { `${element.nationality} - ${element.category}` }
                     </p>
                   )
                     : (
                       <p data-testid={ `${index}-horizontal-top-text` }>
-                        { element.strCategory }
+                        { element.category }
                         {' - '}
-                        { element.strAlcoholic}
+                        { element.alcoholicOrNot}
                       </p>
                     )
                 }
@@ -43,23 +68,23 @@ function CardDoneRecipes() {
                   className="share-icon"
                 />
               </div>
-              <h3 data-testid={ `${index}-horizontal-name` }>
-                {element[`str${element.type}`] }
-              </h3>
+              <Link to={ `/${element.type}/${element.id}` }>
+                <h3 data-testid={ `${index}-horizontal-name` }>
+                  {element.name }
+                </h3>
+              </Link>
               <p data-testid={ `${index}-horizontal-done-date` }>
-                {`Done in: ${element.data}`}
+                {`Done in: ${element.doneDate}`}
               </p>
-              { element.type === 'Meal' && (
-                <ul>
-                  {
-                    element.strTags.split(',').slice(0, LIMIT_TAGS).map((tag, i) => (
-                      <li key={ i } data-testid={ `${i}-${tag}-horizontal-tag` }>
-                        {tag}
-                      </li>
-                    ))
-                  }
-                </ul>
-              )}
+              <ul>
+                {
+                  element.tags.slice(0, LIMIT_TAGS).map((tag, i) => (
+                    <li key={ i } data-testid={ `${index}-${tag}-horizontal-tag` }>
+                      {tag}
+                    </li>
+                  ))
+                }
+              </ul>
             </div>
           </div>
         ))

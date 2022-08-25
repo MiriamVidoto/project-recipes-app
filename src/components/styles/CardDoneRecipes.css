@@ -9,6 +9,7 @@
 
 
 .card-done-recipes h3 {
+  color: rgba(61, 0, 0, 0.91);
   font-size: 1.2em;
   font-weight: 900;
 }

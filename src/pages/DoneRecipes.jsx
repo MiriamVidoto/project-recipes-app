@@ -22,7 +22,7 @@ function DoneRecipe() {
         </button>
         <button
           type="button"
-          ata-testid="filter-by-drink-btn"
+          data-testid="filter-by-drink-btn"
         >
           Drinks
         </button>

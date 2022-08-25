@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import CardRecomend from '../components/CardRecomend';
 import { getDetailsRecipe } from '../services/recipesAPI';
 import './style/RecipeDetails.css';
@@ -9,8 +9,11 @@ function RecipeDetails({ type }) {
   const [recipe, setRecipe] = useState([]);
   const [showBtn, setShowBtn] = useState(true);
   const { id } = useParams();
+  const history = useHistory();
 
   const recipeType = type === 'meal' ? 'Meal' : 'Drink';
+  const localStorageType = type === 'meal' ? 'meals' : 'cocktails';
+  const pathType = type === 'meal' ? 'foods' : 'drinks';
 
   const getRecipeAPI = async () => {
     const newRecipe = await getDetailsRecipe(type, id);
@@ -39,6 +42,10 @@ function RecipeDetails({ type }) {
     .filter((key) => key.includes('strMeasure'))
     : [];
 
+  const listIngredients = ingredientes
+    .filter((e) => recipe[0][e] !== null)
+    .filter((ele) => recipe[0][ele].length !== 0);
+
   const youtubeVideo = () => {
     const url = recipe[0].strYoutube;
     const index = url.indexOf('=');
@@ -47,18 +54,15 @@ function RecipeDetails({ type }) {
   };
 
   const handleClick = () => {
-    const ingred = ingredientes.map((element) => recipe[0][element]);
-    const obj = {
-      [id]: ingred,
-    };
-    console.log(obj);
-    const teste = localStorage.getItem('meals')
-      ? localStorage.getItem('meals') : null;
-    if (type === 'meal') {
-      localStorage.setItem('meals', [teste, JSON.stringify(obj)]);
-    } else {
-      localStorage.setItem('cocktails', [teste, JSON.stringify(obj)]);
-    }
+    const progressRecipes = localStorage.getItem('inProgressRecipes')
+      ? JSON.parse(localStorage.getItem('inProgressRecipes')) : {};
+
+    const newRecipe = { ...progressRecipes,
+      [localStorageType]: { ...progressRecipes[localStorageType],
+        [id]: [] } };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(newRecipe));
+
+    history.push(`/${pathType}/${id}/in-progress`);
   };
 
   return (
@@ -85,7 +89,6 @@ function RecipeDetails({ type }) {
             >
               {recipe[0].strCategory}
             </p>
-            />
             {
               type === 'drinks'
               && <p data-testid="recipe-category">{recipe[0].strAlcoholic}</p>
@@ -93,7 +96,7 @@ function RecipeDetails({ type }) {
             <h3>Ingredients:</h3>
             <ul>
               {
-                ingredientes.map((ingrediente, index) => (
+                listIngredients.map((ingrediente, index) => (
                   <li
                     key={ index }
                     data-testid={ `${index}-ingredient-name-and-measure` }

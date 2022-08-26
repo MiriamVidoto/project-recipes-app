@@ -17,15 +17,28 @@
 .title-recipe {
   border: 1px solid rgba(0, 0, 0, 0.219);
   border-radius: 5px;
+  box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.219);
   font-size: 50px;
-  margin-top: 10px;
+  margin-top: 1%;
   padding: 10px;
   text-shadow: 2px 5px 5px rgba(0, 0, 0, 0.452);
 }
 
 .category-recipe {
   font-size: 20px;
+  margin-top: -5px;
   text-decoration: underline rgba(0, 0, 0, 0.356);
+}
+
+.ingredients-title {
+  align-self: flex-start;
+  font-weight: 600;
+}
+
+.ul-ingredients {
+  align-self: flex-start;
+  font-weight: 600;
+  list-style-type: square;
 }
 
 .instructions-recipe {
@@ -35,7 +48,7 @@
 
 .container-recomend {
   align-self: center;
-  background-color: rgba(253, 63, 5, 0.568);
+  background-color: rgba(253, 63, 5, 0.26);
   border-radius: 5px;
   box-shadow: 4px 7px 7px rgba(0, 0, 0, 0.452);
   display: flex;

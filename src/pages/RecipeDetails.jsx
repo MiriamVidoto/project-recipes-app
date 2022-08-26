@@ -144,8 +144,8 @@ function RecipeDetails({ type }) {
               type === 'drinks'
               && <p data-testid="recipe-category">{recipe[0].strAlcoholic}</p>
             }
-            <h3>Ingredients:</h3>
-            <ul>
+            <h3 className="ingredients-title">Ingredients:</h3>
+            <ul className="ul-ingredients">
               {
                 listIngredients.map((ingrediente, index) => (
                   <li
@@ -160,7 +160,7 @@ function RecipeDetails({ type }) {
                 ))
               }
             </ul>
-            <h3>Instructions</h3>
+            <h3 className="ingredients-title">Instructions</h3>
             <p
               data-testid="instructions"
               className="instructions-recipe"
@@ -170,8 +170,8 @@ function RecipeDetails({ type }) {
             {
               type === 'meal'
               && <iframe
-                width="510"
-                height="300"
+                width="100%"
+                height="250px"
                 src={ youtubeVideo() }
                 title="YouTube video player"
                 frameBorder="0"

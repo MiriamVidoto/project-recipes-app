@@ -71,7 +71,10 @@ function RecipeDetails({ type }) {
 
   const handleClick = () => {
     const progressRecipes = localStorage.getItem('inProgressRecipes')
-      ? JSON.parse(localStorage.getItem('inProgressRecipes')) : {};
+      ? JSON.parse(localStorage.getItem('inProgressRecipes')) : {
+        meals: {},
+        cocktails: {},
+      };
 
     const newRecipe = { ...progressRecipes,
       [localStorageType]: { ...progressRecipes[localStorageType],

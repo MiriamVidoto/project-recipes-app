@@ -3,10 +3,12 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getDetailsRecipe } from '../services/recipesAPI';
 
-function RecipeInProgress({ type }) {
+function RecipeInProgress({ type, history }) {
   const { id } = useParams();
   const recipeType = type === 'meal' ? 'Meal' : 'Drink';
+  const testType = type === 'meal' ? 'meals' : 'cocktails';
   const [recipe, setRecipe] = useState([]);
+  const [ingredientsChecked, setIngredientsChecked] = useState([]);
 
   const getRecipeAPI = async () => {
     const newRecipe = await getDetailsRecipe(type, id);
@@ -25,8 +27,48 @@ function RecipeInProgress({ type }) {
     .filter((e) => recipe[0][e] !== null)
     .filter((ele) => recipe[0][ele].length !== 0);
 
+  const local = JSON.parse(localStorage.getItem('inProgressRecipes'));
+
+  const toggleCheckbox = (e) => {
+    console.log(e.target.parentNode.innerText);
+
+    if (e.target.checked) {
+      // localStorage.setItem(JSON.stringify({ [e.target.id]: e.target.checked }));
+      console.log(local[testType]);
+      local[testType][id].push(e.target.value);
+
+      localStorage.setItem('inProgressRecipes', JSON.stringify(local));
+
+      // const test = console.log(arrayList);
+    } else {
+      const index = (local[testType][id]).indexOf(e.target.value);
+      local[testType][id].splice(index);
+      // const newLocal = local[testType][id].filter((el) => el !== e.target.value);
+      localStorage.setItem('inProgressRecipes', JSON.stringify(local));
+    }
+  };
+
+  const getLocalStorage = () => {
+    const progressRecipes = localStorage.getItem('inProgressRecipes')
+      ? local : {
+        meals: {},
+        cocktails: {},
+      };
+
+    const newRecipe = { ...progressRecipes,
+      [testType]: { ...progressRecipes[testType],
+        [id]: [] } };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(newRecipe));
+    setIngredientsChecked(newRecipe[testType][id]);
+    console.log(ingredientsChecked);
+  };
+
+  const handleButton = () => {
+    history.push('/done-recipes');
+  };
   useEffect(() => {
     getRecipeAPI();
+    getLocalStorage();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -68,12 +110,25 @@ function RecipeInProgress({ type }) {
                     data-testid={ `${index}-ingredient-step` }
                     id="li-ingredients"
                   >
-                    <input
-                      type="checkbox"
-                    />
-                    {recipe[0][ingrediente]}
-                    {' - '}
-                    {recipe[0][amount[index]]}
+                    <label htmlFor={ ingrediente }>
+                      <input
+                        type="checkbox"
+                        onChange={ toggleCheckbox }
+                        id={ ingrediente }
+                        value={
+                          `${recipe[0][ingrediente]} - ${recipe[0][amount[index]]}`
+                        }
+
+                      />
+                      {recipe[0][ingrediente]}
+
+                      {
+                        recipe[0][amount[index]] !== null
+                         && ` - ${recipe[0][amount[index]]}`
+                      }
+
+                    </label>
+
                   </li>
                 ))
               }
@@ -88,6 +143,7 @@ function RecipeInProgress({ type }) {
             <button
               type="button"
               data-testid="finish-recipe-btn"
+              onClick={ handleButton }
             >
               Finalizar Receita
             </button>

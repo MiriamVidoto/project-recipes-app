@@ -1,16 +1,24 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import CardRecomend from '../components/CardRecomend';
 import { getDetailsRecipe } from '../services/recipesAPI';
+import shareIcon from '../images/shareIcon.svg';
+import favoriteIcon from '../images/whiteHeartIcon.svg';
+import favoriteIconBlack from '../images/blackHeartIcon.svg';
 import './style/RecipeDetails.css';
 
 function RecipeDetails({ type }) {
   const [recipe, setRecipe] = useState([]);
   const [showBtn, setShowBtn] = useState(true);
+  const [nameButton, setNameButton] = useState('Start Recipe');
+  const [isFavorite, setIsfavorite] = useState(false);
   const { id } = useParams();
+  const history = useHistory();
 
   const recipeType = type === 'meal' ? 'Meal' : 'Drink';
+  const localStorageType = type === 'meal' ? 'meals' : 'cocktails';
+  const pathType = type === 'meal' ? 'foods' : 'drinks';
 
   const getRecipeAPI = async () => {
     const newRecipe = await getDetailsRecipe(type, id);
@@ -25,10 +33,21 @@ function RecipeDetails({ type }) {
     }
   };
 
+  const buttonNameCondition = () => {
+    if (localStorage.getItem('inProgressRecipes')) {
+      const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+      const verification = Object.keys(inProgress[localStorageType])
+        .some((e) => e === id);
+      if (verification) {
+        setNameButton('Continue Recipe');
+      }
+    }
+  };
+
   useEffect(() => {
     getRecipeAPI();
     btnCondition();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    buttonNameCondition();
   }, []);
 
   const ingredientes = recipe.length !== 0 ? Object.keys(recipe[0])
@@ -39,6 +58,10 @@ function RecipeDetails({ type }) {
     .filter((key) => key.includes('strMeasure'))
     : [];
 
+  const listIngredients = ingredientes
+    .filter((e) => recipe[0][e] !== null)
+    .filter((ele) => recipe[0][ele].length !== 0);
+
   const youtubeVideo = () => {
     const url = recipe[0].strYoutube;
     const index = url.indexOf('=');
@@ -47,18 +70,19 @@ function RecipeDetails({ type }) {
   };
 
   const handleClick = () => {
-    const ingred = ingredientes.map((element) => recipe[0][element]);
-    const obj = {
-      [id]: ingred,
-    };
-    console.log(obj);
-    const teste = localStorage.getItem('meals')
-      ? localStorage.getItem('meals') : null;
-    if (type === 'meal') {
-      localStorage.setItem('meals', [teste, JSON.stringify(obj)]);
-    } else {
-      localStorage.setItem('cocktails', [teste, JSON.stringify(obj)]);
-    }
+    const progressRecipes = localStorage.getItem('inProgressRecipes')
+      ? JSON.parse(localStorage.getItem('inProgressRecipes')) : {};
+
+    const newRecipe = { ...progressRecipes,
+      [localStorageType]: { ...progressRecipes[localStorageType],
+        [id]: [] } };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(newRecipe));
+
+    history.push(`/${pathType}/${id}/in-progress`);
+  };
+
+  const setFavorite = () => {
+    setIsfavorite(!isFavorite);
   };
 
   return (
@@ -73,6 +97,37 @@ function RecipeDetails({ type }) {
               data-testid="recipe-photo"
               className="img-recipe"
             />
+            <div className="container-icons">
+              <button type="button" className="icon-btn" onClick={ () => {} }>
+                <img
+                  src={ shareIcon }
+                  alt="share"
+                  data-testid="share-btn"
+                  className="icon-img"
+                />
+              </button>
+              { isFavorite
+                ? (
+                  <button type="button" className="icon-btn" onClick={ setFavorite }>
+                    <img
+                      src={ favoriteIconBlack }
+                      alt="favorite"
+                      data-testid="favorite-btn"
+                      className="icon-img"
+                    />
+                  </button>
+                )
+                : (
+                  <button type="button" className="icon-btn" onClick={ setFavorite }>
+                    <img
+                      src={ favoriteIcon }
+                      alt="favorite"
+                      data-testid="favorite-btn"
+                      className="icon-img"
+                    />
+                  </button>
+                )}
+            </div>
             <h3
               data-testid="recipe-title"
               className="title-recipe"
@@ -92,7 +147,7 @@ function RecipeDetails({ type }) {
             <h3>Ingredients:</h3>
             <ul>
               {
-                ingredientes.map((ingrediente, index) => (
+                listIngredients.map((ingrediente, index) => (
                   <li
                     key={ index }
                     data-testid={ `${index}-ingredient-name-and-measure` }
@@ -132,7 +187,7 @@ function RecipeDetails({ type }) {
                   className="btn-start"
                   onClick={ handleClick }
                 >
-                  Start Recipe
+                  { nameButton }
                 </button>
               )
             }

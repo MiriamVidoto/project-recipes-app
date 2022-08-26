@@ -66,3 +66,14 @@
   cursor: pointer;
 }
 
+.container-icons {
+  display: flex;
+  margin: 5%;
+  width: 80%;
+}
+
+.icon-btn {
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  width: 50%;
+}

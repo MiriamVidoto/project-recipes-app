@@ -3,12 +3,16 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import CardRecomend from '../components/CardRecomend';
 import { getDetailsRecipe } from '../services/recipesAPI';
+import shareIcon from '../images/shareIcon.svg';
+import favoriteIcon from '../images/whiteHeartIcon.svg';
+import favoriteIconBlack from '../images/blackHeartIcon.svg';
 import './style/RecipeDetails.css';
 
 function RecipeDetails({ type }) {
   const [recipe, setRecipe] = useState([]);
   const [showBtn, setShowBtn] = useState(true);
   const [nameButton, setNameButton] = useState('Start Recipe');
+  const [isFavorite, setIsfavorite] = useState(false);
   const { id } = useParams();
   const history = useHistory();
 
@@ -44,7 +48,6 @@ function RecipeDetails({ type }) {
     getRecipeAPI();
     btnCondition();
     buttonNameCondition();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const ingredientes = recipe.length !== 0 ? Object.keys(recipe[0])
@@ -78,6 +81,10 @@ function RecipeDetails({ type }) {
     history.push(`/${pathType}/${id}/in-progress`);
   };
 
+  const setFavorite = () => {
+    setIsfavorite(!isFavorite);
+  };
+
   return (
     <div className="all-page">
       {
@@ -90,6 +97,37 @@ function RecipeDetails({ type }) {
               data-testid="recipe-photo"
               className="img-recipe"
             />
+            <div className="container-icons">
+              <button type="button" className="icon-btn" onClick={ () => {} }>
+                <img
+                  src={ shareIcon }
+                  alt="share"
+                  data-testid="share-btn"
+                  className="icon-img"
+                />
+              </button>
+              { isFavorite
+                ? (
+                  <button type="button" className="icon-btn" onClick={ setFavorite }>
+                    <img
+                      src={ favoriteIconBlack }
+                      alt="favorite"
+                      data-testid="favorite-btn"
+                      className="icon-img"
+                    />
+                  </button>
+                )
+                : (
+                  <button type="button" className="icon-btn" onClick={ setFavorite }>
+                    <img
+                      src={ favoriteIcon }
+                      alt="favorite"
+                      data-testid="favorite-btn"
+                      className="icon-img"
+                    />
+                  </button>
+                )}
+            </div>
             <h3
               data-testid="recipe-title"
               className="title-recipe"

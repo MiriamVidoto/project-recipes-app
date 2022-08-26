@@ -36,32 +36,34 @@ function Login({ history }) {
     <form className="container">
       <img src={ rockGlass } alt="rockGlass" />
       <h4>TrybeFood</h4>
-      <label htmlFor="email">
-        Email:
-        <input
-          id="email"
-          type="email"
-          className="inputLogin"
-          placeholder="type your email..."
-          data-testid="email-input"
-          name="email"
-          value={ email }
-          onChange={ handleEmail }
-        />
-      </label>
-      <label htmlFor="password">
-        Password:
-        <input
-          id="password"
-          type="password"
-          className="inputLogin"
-          placeholder="type your password..."
-          data-testid="password-input"
-          name="password"
-          value={ password }
-          onChange={ handlePassword }
-        />
-      </label>
+      <div className="div-login">
+        <label htmlFor="email">
+          Email:
+          <input
+            id="email"
+            type="email"
+            className="inputLogin"
+            placeholder="type your email..."
+            data-testid="email-input"
+            name="email"
+            value={ email }
+            onChange={ handleEmail }
+          />
+        </label>
+        <label htmlFor="password">
+          Password:
+          <input
+            id="password"
+            type="password"
+            className="inputLogin"
+            placeholder="type your password..."
+            data-testid="password-input"
+            name="password"
+            value={ password }
+            onChange={ handlePassword }
+          />
+        </label>
+      </div>
       <button
         type="button"
         className="buttonLogin"

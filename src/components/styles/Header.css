@@ -1,3 +1,41 @@
-h2 {
+header {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.title-header {
+  border: 1px solid rgba(0, 0, 0, 0.301);
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.6);
   font-size: 30px;
+  padding: 10px;
+}
+
+.div-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  min-width: 100%;
+}
+
+.div-buttons {
+  display: flex;
+  justify-content: flex-end;
+  max-height: 60px;
+  min-width: 50%;
+}
+
+.img-button {
+  min-width: 40%;
+}
+
+.btn-header {
+  align-self: center;
+  background-color: rgb(231, 142, 142);
+  border: none;
+  border-radius: 5px;
+  box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.6);
+  margin: 3px;
+  min-height: 80%;
 }

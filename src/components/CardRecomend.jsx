@@ -31,9 +31,13 @@ function CardRecomend({ type }) {
               <img
                 src={ recipe[`str${recipeType}Thumb`] }
                 alt={ recipe[`str${recipeType}`] }
+                className="img-scroll"
               />
-              <p>{recipe.strCategory}</p>
-              <h4 data-testid={ `${index}-recomendation-title` }>
+              <p className="category-scroll">{recipe.strCategory}</p>
+              <h4
+                data-testid={ `${index}-recomendation-title` }
+                className="title-scroll"
+              >
                 {recipe[`str${recipeType}`] }
               </h4>
             </div>

@@ -6,8 +6,6 @@ import { getDetailsRecipe } from '../services/recipesAPI';
 function RecipeInProgress({ type }) {
   const { id } = useParams();
   const recipeType = type === 'meal' ? 'Meal' : 'Drink';
-
-  /* const [id, setID] = useState(); */
   const [recipe, setRecipe] = useState([]);
 
   const getRecipeAPI = async () => {
@@ -65,21 +63,22 @@ function RecipeInProgress({ type }) {
             <ul>
               {
                 listIngredients.map((ingrediente, index) => (
-
                   <li
                     key={ index }
                     data-testid={ `${index}-ingredient-step` }
                     id="li-ingredients"
                   >
-                    <input type="checkbox" />
+                    <input
+                      type="checkbox"
+                    />
                     {recipe[0][ingrediente]}
                     {' - '}
                     {recipe[0][amount[index]]}
                   </li>
-
                 ))
               }
             </ul>
+
             <h3>Instructions</h3>
             <p
               data-testid="instructions"

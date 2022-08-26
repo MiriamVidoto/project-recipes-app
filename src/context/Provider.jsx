@@ -7,8 +7,6 @@ import {
   getRecipesIngredient,
   getRecipesName,
 } from '../services/recipesAPI';
-import cocktails from '../tests/mock/cocktails';
-import meals from '../tests/mock/meals';
 
 function Provider({ children }) {
   const [category, setCategory] = useState('');
@@ -35,10 +33,6 @@ function Provider({ children }) {
 
   // A função abaixo é apenas uma medida para funcionar o RecipeInProgress
 
-  const test = () => {
-    localStorage.setItem('inProgressRecipes', JSON.stringify({ cocktails, meals }));
-  };
-
   const [buttonsCategories, setButtonsCategories] = useState([]);
 
   const getSearchAPI = async () => {
@@ -60,7 +54,6 @@ function Provider({ children }) {
   };
 
   const value = {
-    test,
     verifyValue,
     recipesOne,
     recipes,

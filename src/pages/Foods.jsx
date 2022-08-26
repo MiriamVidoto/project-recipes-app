@@ -7,7 +7,7 @@ import myContext from '../context/Context';
 import { getCategories, getRecipes } from '../services/recipesAPI';
 
 function Foods() {
-  const { setType, setRecipes, setButtonsCategories, test } = useContext(myContext);
+  const { setType, setRecipes, setButtonsCategories } = useContext(myContext);
 
   const getDataAPI = async (type) => {
     const newRecipes = await getRecipes(type);
@@ -17,7 +17,6 @@ function Foods() {
   };
 
   useEffect(() => {
-    test();
     setType('meal');
     getDataAPI('meal');
   }, []);

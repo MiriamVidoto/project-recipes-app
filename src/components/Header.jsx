@@ -19,31 +19,37 @@ function Header({ title }) {
 
   return (
     <header>
-      <h2 data-testid="page-title">{title}</h2>
-      <button
-        type="button"
-        onClick={ () => history.push('/profile') }
-      >
-        <img
-          data-testid="profile-top-btn"
-          alt="profileIcon"
-          src={ profileIcon }
-        />
-      </button>
-      {
-        searchIconCondition && (
-          <button
-            type="button"
-            onClick={ () => (setShowSearchBar(!showSearchBar)) }
-          >
-            <img
-              data-testid="search-top-btn"
-              alt="searchIcon"
-              src={ searchIcon }
-            />
-          </button>
-        )
-      }
+      <div className="container-header">
+        <button
+          type="button"
+          onClick={ () => history.push('/profile') }
+          className="icon-btn"
+        >
+          <img
+            data-testid="profile-top-btn"
+            alt="profileIcon"
+            src={ profileIcon }
+            className="img-icon"
+          />
+        </button>
+        <h2 data-testid="page-title">{title}</h2>
+        {
+          searchIconCondition && (
+            <button
+              type="button"
+              onClick={ () => (setShowSearchBar(!showSearchBar)) }
+              className="icon-btn"
+            >
+              <img
+                data-testid="search-top-btn"
+                alt="searchIcon"
+                src={ searchIcon }
+                className="img-icon"
+              />
+            </button>
+          )
+        }
+      </div>
       <SearchBar showSearchBar={ showSearchBar } />
     </header>
   );

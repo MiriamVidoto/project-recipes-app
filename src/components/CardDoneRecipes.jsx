@@ -1,46 +1,33 @@
-import React from 'react';
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import './styles/CardDoneRecipes.css';
 
-function CardDoneRecipes() {
-  // const doneRecipes = [
-  //   {
-  //     id: '52771',
-  //     type: 'food',
-  //     nationality: 'Italian',
-  //     category: 'Vegetarian',
-  //     alcoholicOrNot: '',
-  //     name: 'Spicy Arrabiata Penne',
-  //     image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
-  //     doneDate: '23/06/2020',
-  //     tags: ['Pasta', 'Curry'],
-  //   },
-  //   {
-  //     id: '178319',
-  //     type: 'drink',
-  //     nationality: '',
-  //     category: 'Cocktail',
-  //     alcoholicOrNot: 'Alcoholic',
-  //     name: 'Aquamarine',
-  //     image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
-  //     doneDate: '23/06/2020',
-  //     tags: [],
-  //   },
-  // ];
+const copy = require('clipboard-copy');
 
-  const doneRecipes = localStorage.getItem('doneRecipes')
-    ? JSON.parse(localStorage.getItem('doneRecipes'))
-    : [];
+function CardDoneRecipes({ doneRecipes }) {
+  const [linkCopied, setLinkCopied] = useState(false);
 
   const LIMIT_TAGS = 2;
 
+  const handleCopyURL = (element) => {
+    const copyURL = `http://localhost:3000/${element.type}s/${element.id}`;
+    copy(copyURL);
+    setLinkCopied(true);
+    // const oneSecond = 1000;
+    // setTimeout(setLinkCopied(false), oneSecond);
+  };
+
   return (
-    <div>
+    <div className="container-done">
+      {
+        linkCopied && <span>Link copied!</span>
+      }
       {
         doneRecipes.map((element, index) => (
           <div className="card-done-recipes" key={ index }>
-            <Link to={ `/${element.type}s/${element.id}` }>
+            <Link to={ `/${element.type}s/${element.id}` } className="a-thumb">
               <img
                 src={ element.image }
                 alt={ element.name }
@@ -64,12 +51,18 @@ function CardDoneRecipes() {
                       </p>
                     )
                 }
-                <img
-                  src={ shareIcon }
-                  alt="share"
-                  data-testid={ `${index}-horizontal-share-btn` }
-                  className="share-icon"
-                />
+                <button
+                  type="button"
+                  onClick={ () => handleCopyURL(element) }
+                  className="icon-btn"
+                >
+                  <img
+                    src={ shareIcon }
+                    alt="share"
+                    data-testid={ `${index}-horizontal-share-btn` }
+                    className="share-icon"
+                  />
+                </button>
               </div>
               <Link to={ `/${element.type}s/${element.id}` }>
                 <h3 data-testid={ `${index}-horizontal-name` }>
@@ -95,5 +88,9 @@ function CardDoneRecipes() {
     </div>
   );
 }
+
+CardDoneRecipes.propTypes = {
+  doneRecipes: PropTypes.arrayOf.isRequired,
+};
 
 export default CardDoneRecipes;

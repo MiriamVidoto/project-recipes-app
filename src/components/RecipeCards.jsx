@@ -26,8 +26,12 @@ function RecipeCards() {
                   src={ recipe[`str${recipeType}Thumb`] }
                   alt={ recipe[`str${recipeType}`] }
                   data-testid={ `${index}-card-img` }
+                  className="card-img"
                 />
-                <h2 data-testid={ `${index}-card-name` }>
+                <h2
+                  data-testid={ `${index}-card-name` }
+                  className="recipe-title-card"
+                >
                   {recipe[`str${recipeType}`] }
                 </h2>
               </div>

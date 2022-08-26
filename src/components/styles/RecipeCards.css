@@ -7,7 +7,7 @@
 
 .recipeCard {
   align-items: center;
-  background-color: rgba(239, 239, 237, 0.282);
+  background-color: rgba(174, 65, 65, 0.462);
   border-radius: 8px;
   box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.342);
   display: flex;
@@ -22,9 +22,14 @@
   width: 47%;
 }
 
-.recipeCard h2 {
+.card-img {
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.342);
+}
+
+.recipe-title-card {
   color: rgba(61, 0, 0, 0.91);
-  font-size: 1em;
+  font-size: 1.5em;
+  margin: auto;
 }
 
 .recipeCard img {

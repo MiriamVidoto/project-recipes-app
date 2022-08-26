@@ -1,16 +1,16 @@
 .footer {
-  background-color: rgba(255, 60, 0, 0.479);
+  background-color: rgba(174, 65, 65, 0.822);
   bottom: 0;
   display: flex;
   height: 9%;
   justify-content: space-around;
   left: 0;
   position: fixed;
-  text-align: center;
   width: 100%;
 }
 
 .imgFooter {
+  margin-top: 10%;
   width: 100%;
 }
 

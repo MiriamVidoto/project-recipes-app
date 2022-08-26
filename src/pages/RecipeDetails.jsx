@@ -85,7 +85,6 @@ function RecipeDetails({ type }) {
             >
               {recipe[0].strCategory}
             </p>
-            />
             {
               type === 'drinks'
               && <p data-testid="recipe-category">{recipe[0].strAlcoholic}</p>

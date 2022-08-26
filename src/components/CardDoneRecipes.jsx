@@ -15,9 +15,10 @@ function CardDoneRecipes({ doneRecipes }) {
     const copyURL = `http://localhost:3000/${element.type}s/${element.id}`;
     copy(copyURL);
     setLinkCopied(true);
-    // precisa voltar o estado para false
-    // const oneSecond = 1000;
-    // setTimeout(setLinkCopied(false), oneSecond);
+    const TWO_SECONDS = 2000;
+    setTimeout(() => {
+      setLinkCopied(false);
+    }, TWO_SECONDS);
   };
 
   return (

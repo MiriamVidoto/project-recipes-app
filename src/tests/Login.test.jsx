@@ -31,6 +31,7 @@ describe('Testa a página de Login.', () => {
   })
   test('Verifica se o usuário é redirecionado para a página de receitas de comidas', () => {
     const { history } = renderWithRouter(<App />);
+    
     const emailInput = screen.getByTestId("email-input");
     const passwordInput = screen.getByTestId("password-input");
     const buttonLogin = screen.getByTestId("login-submit-btn");
@@ -41,6 +42,6 @@ describe('Testa a página de Login.', () => {
     expect(buttonLogin).toBeEnabled();
     userEvent.click(buttonLogin);
     const { pathname } = history.location;
-    expect(pathname).toBe('/foods');
+    expect(pathname).toBe("/foods");
   })
 })

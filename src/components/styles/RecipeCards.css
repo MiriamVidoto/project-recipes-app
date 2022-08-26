@@ -2,6 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  width: 100%;
 }
 
 .recipeCard {
@@ -12,9 +13,13 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  margin-bottom: 10px;
-  padding: 10px;
-  width: 25vh;
+  margin-bottom: 5%;
+  padding: 5%;
+  width: 100%;
+}
+
+.recipeCards a {
+  width: 47%;
 }
 
 .card-img {
@@ -29,6 +34,6 @@
 
 .recipeCard img {
   margin-bottom: 5px;
-  width: 135px;
+  width: 100%;
 }
 

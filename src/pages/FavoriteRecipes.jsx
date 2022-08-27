@@ -1,29 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import CardFavoriteRecipes from '../components/CardFavoriteRecipes';
 import Header from '../components/Header';
 
 function FavoriteRecipes() {
-  const listFavoriteRecipes = [
-    {
-      id: '52771',
-      type: 'food',
-      nationality: 'Italian',
-      category: 'Vegetarian',
-      alcoholicOrNot: '',
-      name: 'Spicy Arrabiata Penne',
-      image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
-    },
-    {
-      id: '178319',
-      type: 'drink',
-      nationality: '',
-      category: 'Cocktail',
-      alcoholicOrNot: 'Alcoholic',
-      name: 'Aquamarine',
-      image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
-    },
-  ];
+  // const listFavoriteRecipes = [
+  //   {
+  //     id: '52771',
+  //     type: 'food',
+  //     nationality: 'Italian',
+  //     category: 'Vegetarian',
+  //     alcoholicOrNot: '',
+  //     name: 'Spicy Arrabiata Penne',
+  //     image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
+  //   },
+  //   {
+  //     id: '178319',
+  //     type: 'drink',
+  //     nationality: '',
+  //     category: 'Cocktail',
+  //     alcoholicOrNot: 'Alcoholic',
+  //     name: 'Aquamarine',
+  //     image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
+  //   },
+  // ];
 
-  // const [listFavoriteRecipes, setListFavoriteRecipes] = useState([]);
+  const [listFavoriteRecipes, setListFavoriteRecipes] = useState([]);
+
+  const getRecipesLocalStorage = () => {
+    if (localStorage.getItem('favoriteRecipes')) {
+      setListFavoriteRecipes(JSON.parse(localStorage.getItem('favoriteRecipes')));
+    }
+  };
+
+  useEffect(() => {
+    getRecipesLocalStorage();
+  }, []);
 
   const handleFilter = ({ target }) => {
     const { name } = target;
@@ -63,6 +74,7 @@ function FavoriteRecipes() {
           Drinks
         </button>
       </section>
+      <CardFavoriteRecipes listRecipes={ listFavoriteRecipes } />
     </div>
   );
 }

@@ -25,6 +25,13 @@ function RecipeInProgress({ type }) {
     .filter((e) => recipe[0][e] !== null)
     .filter((ele) => recipe[0][ele].length !== 0);
 
+  const saveCheckBox = ({ target }) => {
+    const { checked } = target;
+    if (checked) {
+      const storage = localStorage.getItem
+    }
+  };
+
   useEffect(() => {
     getRecipeAPI();
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -70,6 +77,7 @@ function RecipeInProgress({ type }) {
                   >
                     <input
                       type="checkbox"
+                      onChange={ saveCheckBox }
                     />
                     {recipe[0][ingrediente]}
                     {' - '}

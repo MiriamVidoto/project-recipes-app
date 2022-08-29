@@ -1,31 +1,14 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import shareIcon from '../images/shareIcon.svg';
+import IconCopy from './IconCopy';
 import './styles/CardDoneRecipes.css';
 
-const copy = require('clipboard-copy');
-
 function CardDoneRecipes({ doneRecipes }) {
-  const [linkCopied, setLinkCopied] = useState(false);
-
   const LIMIT_TAGS = 2;
-
-  const handleCopyURL = (element) => {
-    const copyURL = `http://localhost:3000/${element.type}s/${element.id}`;
-    copy(copyURL);
-    setLinkCopied(true);
-    const TWO_SECONDS = 2000;
-    setTimeout(() => {
-      setLinkCopied(false);
-    }, TWO_SECONDS);
-  };
 
   return (
     <div className="container-done">
-      {
-        linkCopied && <span>Link copied!</span>
-      }
       {
         doneRecipes.map((element, index) => (
           <div className="card-done-recipes" key={ index }>
@@ -53,18 +36,11 @@ function CardDoneRecipes({ doneRecipes }) {
                       </p>
                     )
                 }
-                <button
-                  type="button"
-                  onClick={ () => handleCopyURL(element) }
-                  className="icon-btn"
-                >
-                  <img
-                    src={ shareIcon }
-                    alt="share"
-                    data-testid={ `${index}-horizontal-share-btn` }
-                    className="share-icon"
-                  />
-                </button>
+                <IconCopy
+                  index={ index }
+                  id={ element.id }
+                  type={ element.type }
+                />
               </div>
               <Link to={ `/${element.type}s/${element.id}` }>
                 <h3 data-testid={ `${index}-horizontal-name` }>
@@ -92,7 +68,17 @@ function CardDoneRecipes({ doneRecipes }) {
 }
 
 CardDoneRecipes.propTypes = {
-  doneRecipes: PropTypes.arrayOf.isRequired,
+  doneRecipes: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    type: PropTypes.string,
+    nationality: PropTypes.string,
+    category: PropTypes.string,
+    alcoholicOrNot: PropTypes.string,
+    name: PropTypes.string,
+    image: PropTypes.string,
+    doneDate: PropTypes.string,
+    tags: PropTypes.arrayOf(PropTypes.string),
+  })).isRequired,
 };
 
 export default CardDoneRecipes;

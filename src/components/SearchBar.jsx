@@ -13,12 +13,10 @@ function SearchBar({ showSearchBar }) {
     getSearchAPI,
     setType,
     recipes,
-    recipesOne,
     verifyValue,
   } = useContext(myContext);
 
   useEffect(() => {
-    recipesOne();
     verifyValue();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recipes]);

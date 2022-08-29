@@ -3,27 +3,6 @@ import CardFavoriteRecipes from '../components/CardFavoriteRecipes';
 import Header from '../components/Header';
 
 function FavoriteRecipes() {
-  // const listFavoriteRecipes = [
-  //   {
-  //     id: '52771',
-  //     type: 'food',
-  //     nationality: 'Italian',
-  //     category: 'Vegetarian',
-  //     alcoholicOrNot: '',
-  //     name: 'Spicy Arrabiata Penne',
-  //     image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
-  //   },
-  //   {
-  //     id: '178319',
-  //     type: 'drink',
-  //     nationality: '',
-  //     category: 'Cocktail',
-  //     alcoholicOrNot: 'Alcoholic',
-  //     name: 'Aquamarine',
-  //     image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
-  //   },
-  // ];
-
   const [listFavoriteRecipes, setListFavoriteRecipes] = useState([]);
 
   const getRecipesLocalStorage = () => {
@@ -38,7 +17,7 @@ function FavoriteRecipes() {
 
   const handleFilter = ({ target }) => {
     const { name } = target;
-    doneRecipes();
+    getRecipesLocalStorage();
     if (name !== 'all') {
       const newRecipes = listFavoriteRecipes.filter((recipe) => recipe.type === name);
       setListFavoriteRecipes(newRecipes);

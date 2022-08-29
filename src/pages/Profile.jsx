@@ -2,25 +2,33 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import './style/Profile.css';
 
 function Profile() {
   const history = useHistory();
 
-  const getEmail = localStorage.getItem('user');
+  const getEmail = JSON.parse(localStorage.getItem('user'));
 
   const handleLogout = () => {
     localStorage.clear();
     history.push('/');
   };
+
   return (
     <div>
       <Header title="Profile" />
-      <div>
-        <p data-testid="profile-email">{getEmail}</p>
+      <p
+        data-testid="profile-email"
+        className="email-profile"
+      >
+        {getEmail.email}
+      </p>
+      <div className="btns-profile">
         <button
           data-testid="profile-done-btn"
           type="button"
           onClick={ () => history.push('/done-recipes') }
+          className="btn-profile"
         >
           Done Recipes
 
@@ -29,6 +37,7 @@ function Profile() {
           data-testid="profile-favorite-btn"
           type="button"
           onClick={ () => history.push('/favorite-recipes') }
+          className="btn-profile"
         >
           Favorite Recipes
         </button>
@@ -36,6 +45,7 @@ function Profile() {
           data-testid="profile-logout-btn"
           type="button"
           onClick={ handleLogout }
+          className="btn-profile"
         >
           Logout
         </button>

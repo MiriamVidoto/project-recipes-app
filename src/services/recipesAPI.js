@@ -88,7 +88,6 @@ export const getRecomends = async (type) => {
     : 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
   const response = await fetch(url);
   const data = await response.json();
-  console.log(data);
   const recipe = type === 'drinks'
     ? data.meals
     : data.drinks;

@@ -13,6 +13,7 @@ function Provider({ children }) {
   const [searchInput, setSearchInput] = useState('');
   const [recipes, setRecipes] = useState([]);
   const [type, setType] = useState('meal');
+  const [buttonsCategories, setButtonsCategories] = useState([]);
   const history = useHistory();
 
   const verifyValue = () => {
@@ -21,33 +22,32 @@ function Provider({ children }) {
     }
   };
 
-  const recipesOne = (newRecipes) => {
+  const recipesOne = (result) => {
     const pathType = type === 'meal' ? 'foods' : 'drinks';
     const recipeTypeId = type === 'meal' ? 'idMeal' : 'idDrink';
-    if (newRecipes !== null && newRecipes.length === 1) {
-      newRecipes.map((element) => (
+    if (result.length === 1) {
+      result.map((element) => (
         history.push(`/${pathType}/${element[recipeTypeId]}`)
       ));
     }
   };
-
-  // A função abaixo é apenas uma medida para funcionar o RecipeInProgress
-
-  const [buttonsCategories, setButtonsCategories] = useState([]);
 
   const getSearchAPI = async () => {
     if (category === 'ingredient') {
       const newRecipes = await getRecipesIngredient(type, searchInput);
       recipesOne(newRecipes);
       setRecipes(newRecipes);
+      recipesOne(newRecipes);
     } else if (category === 'nameSearch') {
       const newRecipes = await getRecipesName(type, searchInput);
       recipesOne(newRecipes);
       setRecipes(newRecipes);
+      recipesOne(newRecipes);
     } else if (category === 'firstLetter' && searchInput.length === 1) {
       const newRecipes = await getRecipesfirstLetter(type, searchInput);
       recipesOne(newRecipes);
       setRecipes(newRecipes);
+      recipesOne(newRecipes);
     } else {
       global.alert('Your search must have only 1 (one) character');
     }
@@ -55,7 +55,6 @@ function Provider({ children }) {
 
   const value = {
     verifyValue,
-    recipesOne,
     recipes,
     getSearchAPI,
     category,

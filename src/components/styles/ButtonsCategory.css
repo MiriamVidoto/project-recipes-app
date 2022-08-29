@@ -1,8 +1,8 @@
 .buttonsCategory {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
-  padding: 20px;
+  justify-content: space-between;
+  padding: 10px;
 }
 
 .buttonsCategory button {

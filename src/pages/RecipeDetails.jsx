@@ -1,25 +1,51 @@
 import PropTypes from 'prop-types';
-// import { useHistory } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import CardRecomend from '../components/CardRecomend';
+import Favorite from '../components/Favorite';
+import IconCopy from '../components/IconCopy';
 import { getDetailsRecipe } from '../services/recipesAPI';
 import './style/RecipeDetails.css';
 
 function RecipeDetails({ type }) {
-  // const history = useHistory();
   const [recipe, setRecipe] = useState([]);
+  const [showBtn, setShowBtn] = useState(true);
+  const [nameButton, setNameButton] = useState('Start Recipe');
   const { id } = useParams();
+  const history = useHistory();
 
   const recipeType = type === 'meal' ? 'Meal' : 'Drink';
+  const localStorageType = type === 'meal' ? 'meals' : 'cocktails';
+  const pathType = type === 'meal' ? 'foods' : 'drinks';
 
   const getRecipeAPI = async () => {
     const newRecipe = await getDetailsRecipe(type, id);
     setRecipe(newRecipe);
   };
 
+  const btnCondition = () => {
+    const doneRecipes = localStorage.getItem('doneRecipes');
+    if (doneRecipes) {
+      const condition = doneRecipes.json().some((element) => element.id === id);
+      setShowBtn(!condition);
+    }
+  };
+
+  const buttonNameCondition = () => {
+    if (localStorage.getItem('inProgressRecipes')) {
+      const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+      const verification = Object.keys(inProgress[localStorageType])
+        .some((e) => e === id);
+      if (verification) {
+        setNameButton('Continue Recipe');
+      }
+    }
+  };
+
   useEffect(() => {
     getRecipeAPI();
+    btnCondition();
+    buttonNameCondition();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -31,11 +57,19 @@ function RecipeDetails({ type }) {
     .filter((key) => key.includes('strMeasure'))
     : [];
 
+  const listIngredients = ingredientes
+    .filter((e) => recipe[0][e] !== null)
+    .filter((ele) => recipe[0][ele].length !== 0);
+
   const youtubeVideo = () => {
     const url = recipe[0].strYoutube;
     const index = url.indexOf('=');
     const youtubeCode = url.slice(index + 1);
     return `https://www.youtube.com/embed/${youtubeCode}`;
+  };
+
+  const handleClick = () => {
+    history.push(`/${pathType}/${id}/in-progress`);
   };
 
   return (
@@ -50,6 +84,10 @@ function RecipeDetails({ type }) {
               data-testid="recipe-photo"
               className="img-recipe"
             />
+            <div className="container-icons">
+              <IconCopy id={ id } type={ type } index={ 0 } />
+              <Favorite id={ id } type={ type } />
+            </div>
             <h3
               data-testid="recipe-title"
               className="title-recipe"
@@ -66,13 +104,14 @@ function RecipeDetails({ type }) {
               type === 'drinks'
               && <p data-testid="recipe-category">{recipe[0].strAlcoholic}</p>
             }
-            <h3>Ingredients:</h3>
-            <ul>
+            <h3 className="ingredients-title">Ingredients:</h3>
+            <ul className="ul-ingredients">
               {
-                ingredientes.map((ingrediente, index) => (
+                listIngredients.map((ingrediente, index) => (
                   <li
                     key={ index }
                     data-testid={ `${index}-ingredient-name-and-measure` }
+                    id="li-ingredients"
                   >
                     {recipe[0][ingrediente]}
                     {' - '}
@@ -81,7 +120,7 @@ function RecipeDetails({ type }) {
                 ))
               }
             </ul>
-            <h3>Instructions</h3>
+            <h3 className="ingredients-title">Instructions</h3>
             <p
               data-testid="instructions"
               className="instructions-recipe"
@@ -91,21 +130,27 @@ function RecipeDetails({ type }) {
             {
               type === 'meal'
               && <iframe
-                width="510"
-                height="300"
+                width="100%"
+                height="250px"
                 src={ youtubeVideo() }
                 title="YouTube video player"
                 frameBorder="0"
                 data-testid="video"
               />
             }
-            <button
-              type="button"
-              data-testid="start-recipe-btn"
-              className="btn-start"
-            >
-              Start Recipe
-            </button>
+            {
+              showBtn
+              && (
+                <button
+                  type="button"
+                  data-testid="start-recipe-btn"
+                  className="btn-start"
+                  onClick={ handleClick }
+                >
+                  { nameButton }
+                </button>
+              )
+            }
             <section className="container-recomend">
               <CardRecomend type={ type } />
             </section>

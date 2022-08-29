@@ -7,7 +7,7 @@ import FavoriteRecipes from '../pages/FavoriteRecipes';
 import DoneRecipes from '../pages/DoneRecipes';
 import Profile from '../pages/Profile';
 import Foods from '../pages/Foods';
-import RecipeInProgress from './RecipeInProgress';
+import RecipeInProgress from '../pages/RecipeInProgress';
 
 function Routes() {
   return (

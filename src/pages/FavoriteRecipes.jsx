@@ -19,8 +19,9 @@ function FavoriteRecipes() {
   }, []);
 
   const handleFilter = ({ target }) => {
+    const favorites = getRecipesLocalStorage();
     const { name } = target;
-    getRecipesLocalStorage();
+    setListFavoriteRecipes(favorites);
     if (name !== 'all') {
       const newRecipes = listFavoriteRecipes.filter((recipe) => recipe.type === name);
       setListFavoriteRecipes(newRecipes);

@@ -85,8 +85,8 @@ function RecipeDetails({ type }) {
               className="img-recipe"
             />
             <div className="container-icons">
-              <IconCopy id={ id } type={ type } />
-              <IconFavorite id={ id } type={ type } />
+              <IconCopy id={ id } type={ type } index="0" />
+              <IconFavorite id={ id } type={ type } index="0" />
             </div>
             <h3
               data-testid="recipe-title"

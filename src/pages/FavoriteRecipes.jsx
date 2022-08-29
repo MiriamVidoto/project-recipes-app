@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import ButtonsFilter from '../components/ButtonsFilter';
 import CardFavoriteRecipes from '../components/CardFavoriteRecipes';
 import Header from '../components/Header';
 
@@ -27,32 +28,7 @@ function FavoriteRecipes() {
   return (
     <div className="favorite-recipes">
       <Header title="Favorite Recipes" />
-      <section className="favorite-recipes-buttons">
-        <button
-          type="button"
-          data-testid="filter-by-all-btn"
-          name="all"
-          onClick={ (e) => handleFilter(e) }
-        >
-          All
-        </button>
-        <button
-          type="button"
-          data-testid="filter-by-food-btn"
-          name="food"
-          onClick={ (e) => handleFilter(e) }
-        >
-          Foods
-        </button>
-        <button
-          type="button"
-          data-testid="filter-by-drink-btn"
-          name="drink"
-          onClick={ (e) => handleFilter(e) }
-        >
-          Drinks
-        </button>
-      </section>
+      <ButtonsFilter handleFilter={ handleFilter } />
       <CardFavoriteRecipes listRecipes={ listFavoriteRecipes } />
     </div>
   );

@@ -3,11 +3,11 @@ import { Route, Switch } from 'react-router-dom';
 import Login from '../pages/Login';
 import Drinks from '../pages/Drinks';
 import RecipeDetails from '../pages/RecipeDetails';
+import FavoriteRecipes from '../pages/FavoriteRecipes';
 import DoneRecipes from '../pages/DoneRecipes';
 import Profile from '../pages/Profile';
 import Foods from '../pages/Foods';
-import RecipeInProgress from '../pages/RecipeInProgress';
-import FavoriteRecipes from '../pages/FavoriteRecipes';
+import RecipeInProgress from './RecipeInProgress';
 
 function Routes() {
   return (

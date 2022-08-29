@@ -9,8 +9,10 @@ function CheckIngredient({ type, index, recipe, ingrediente }) {
   const amount = recipe.length !== 0 ? Object.keys(recipe[0])
     .filter((key) => key.includes('strMeasure'))
     : [];
+
   const ingredientSome = recipe[0][amount[index]] !== null
     ? `${recipe[0][ingrediente]} - ${recipe[0][amount[index]]}` : recipe[0][ingrediente];
+
   const local = JSON.parse(localStorage.getItem('inProgressRecipes'));
 
   const verifyCheck = () => {
@@ -25,31 +27,25 @@ function CheckIngredient({ type, index, recipe, ingrediente }) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const verifyStorage = () => {
-    if (local[testType][id] !== undefined) {
-      const newRecipe = { ...local,
-        [testType]: { ...local[testType],
-          [id]: [...local[testType[id]]] } };
-      localStorage.setItem('inProgressRecipes', JSON.stringify(newRecipe));
-    } else {
-      const newRecipe = { ...local,
-        [testType]: { ...local[testType],
-          [id]: [] } };
-      localStorage.setItem('inProgressRecipes', JSON.stringify(newRecipe));
-    }
-  };
-
-  const toggleCheckbox = (e) => {
+  const toggleCheckbox = () => {
     setIngredientsChecked(!ingredientsChecked);
-    verifyStorage();
-    if (!ingredientsChecked) {
-      local[testType][id].push(e.target.value);
-      localStorage.setItem('inProgressRecipes', JSON.stringify(local));
+    const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (!storage[testType][id]) {
+      const obj = { [id]: [ingredientSome] };
+      storage[testType] = obj;
     } else {
-      const i = (local[testType][id]).indexOf(e.target.value);
-      local[testType][id].splice(i);
-      localStorage.setItem('inProgressRecipes', JSON.stringify(local));
+      storage[testType][id].push(ingredientSome);
     }
+    localStorage.setItem('inProgressRecipes', JSON.stringify(storage));
+
+    // if (!ingredientsChecked) {
+    //   local[testType][id].push(e.target.value);
+    //   localStorage.setItem('inProgressRecipes', JSON.stringify(local));
+    // } else {
+    //   const i = (local[testType][id]).indexOf(e.target.value);
+    //   local[testType][id].splice(i);
+    //   localStorage.setItem('inProgressRecipes', JSON.stringify(local));
+    // }
   };
 
   return (
@@ -64,7 +60,7 @@ function CheckIngredient({ type, index, recipe, ingrediente }) {
       >
         <input
           type="checkbox"
-          onChange={ (e) => toggleCheckbox(e) }
+          onChange={ toggleCheckbox }
           id={ ingrediente }
           checked={ ingredientsChecked }
           value={

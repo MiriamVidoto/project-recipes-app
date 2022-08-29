@@ -21,12 +21,12 @@ function Provider({ children }) {
       global.alert('Sorry, we haven\'t found any recipes for these filters.');
     }
   };
-
-  const recipesOne = (newRecipes) => {
+  
+  const recipesOne = (result) => {
     const pathType = type === 'meal' ? 'foods' : 'drinks';
     const recipeTypeId = type === 'meal' ? 'idMeal' : 'idDrink';
-    if (newRecipes !== null && newRecipes.length === 1) {
-      newRecipes.map((element) => (
+    if (result.length === 1) {
+      result.map((element) => (
         history.push(`/${pathType}/${element[recipeTypeId]}`)
       ));
     }
@@ -37,14 +37,17 @@ function Provider({ children }) {
       const newRecipes = await getRecipesIngredient(type, searchInput);
       recipesOne(newRecipes);
       setRecipes(newRecipes);
+      recipesOne(newRecipes);
     } else if (category === 'nameSearch') {
       const newRecipes = await getRecipesName(type, searchInput);
       recipesOne(newRecipes);
       setRecipes(newRecipes);
+      recipesOne(newRecipes);
     } else if (category === 'firstLetter' && searchInput.length === 1) {
       const newRecipes = await getRecipesfirstLetter(type, searchInput);
       recipesOne(newRecipes);
       setRecipes(newRecipes);
+      recipesOne(newRecipes);
     } else {
       global.alert('Your search must have only 1 (one) character');
     }

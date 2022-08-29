@@ -23,29 +23,28 @@ function Provider({ children }) {
   };
 
   const recipesOne = (result) => {
-    const pathType = type === 'meal' ? 'foods' : 'drinks';
-    const recipeTypeId = type === 'meal' ? 'idMeal' : 'idDrink';
-    if (result.length === 1) {
-      result.map((element) => (
-        history.push(`/${pathType}/${element[recipeTypeId]}`)
-      ));
+    if (result !== null) {
+      const pathType = type === 'meal' ? 'foods' : 'drinks';
+      const recipeTypeId = type === 'meal' ? 'idMeal' : 'idDrink';
+      if (result.length === 1) {
+        result.map((element) => (
+          history.push(`/${pathType}/${element[recipeTypeId]}`)
+        ));
+      }
     }
   };
 
   const getSearchAPI = async () => {
     if (category === 'ingredient') {
       const newRecipes = await getRecipesIngredient(type, searchInput);
-      recipesOne(newRecipes);
       setRecipes(newRecipes);
       recipesOne(newRecipes);
     } else if (category === 'nameSearch') {
       const newRecipes = await getRecipesName(type, searchInput);
-      recipesOne(newRecipes);
       setRecipes(newRecipes);
       recipesOne(newRecipes);
     } else if (category === 'firstLetter' && searchInput.length === 1) {
       const newRecipes = await getRecipesfirstLetter(type, searchInput);
-      recipesOne(newRecipes);
       setRecipes(newRecipes);
       recipesOne(newRecipes);
     } else {

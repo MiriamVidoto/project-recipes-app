@@ -21,7 +21,7 @@ function Provider({ children }) {
       global.alert('Sorry, we haven\'t found any recipes for these filters.');
     }
   };
-  
+
   const recipesOne = (result) => {
     const pathType = type === 'meal' ? 'foods' : 'drinks';
     const recipeTypeId = type === 'meal' ? 'idMeal' : 'idDrink';

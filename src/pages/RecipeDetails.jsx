@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import CardRecomend from '../components/CardRecomend';
+import Favorite from '../components/Favorite';
 import IconCopy from '../components/IconCopy';
-import IconFavorite from '../components/IconFavorite';
 import { getDetailsRecipe } from '../services/recipesAPI';
 import './style/RecipeDetails.css';
 
@@ -85,8 +85,8 @@ function RecipeDetails({ type }) {
               className="img-recipe"
             />
             <div className="container-icons">
-              <IconCopy id={ id } type={ type } index="0" />
-              <IconFavorite id={ id } type={ type } index="0" />
+              <IconCopy id={ id } type={ type } index={ 0 } />
+              <Favorite id={ id } type={ type } />
             </div>
             <h3
               data-testid="recipe-title"

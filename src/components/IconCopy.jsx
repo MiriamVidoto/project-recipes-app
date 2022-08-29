@@ -40,7 +40,7 @@ function IconCopy({ id, type, index }) {
 IconCopy.propTypes = {
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  index: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 export default IconCopy;

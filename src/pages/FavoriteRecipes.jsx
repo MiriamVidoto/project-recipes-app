@@ -8,12 +8,14 @@ function FavoriteRecipes() {
 
   const getRecipesLocalStorage = () => {
     if (localStorage.getItem('favoriteRecipes')) {
-      setListFavoriteRecipes(JSON.parse(localStorage.getItem('favoriteRecipes')));
+      return JSON.parse(localStorage.getItem('favoriteRecipes'));
     }
+    return [];
   };
 
   useEffect(() => {
-    getRecipesLocalStorage();
+    const favorites = getRecipesLocalStorage();
+    setListFavoriteRecipes(favorites);
   }, []);
 
   const handleFilter = ({ target }) => {

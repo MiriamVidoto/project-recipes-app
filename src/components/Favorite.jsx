@@ -4,7 +4,7 @@ import favoriteIcon from '../images/whiteHeartIcon.svg';
 import favoriteIconBlack from '../images/blackHeartIcon.svg';
 import { getDetailsRecipe } from '../services/recipesAPI';
 
-function IconFavorite({ id, type, index }) {
+function Favorite({ id, type }) {
   const [isFavorite, setIsfavorite] = useState(false);
   const [recipe, setRecipe] = useState([]);
 
@@ -65,14 +65,13 @@ function IconFavorite({ id, type, index }) {
       <button
         type="button"
         className="icon-btn"
-        data-testid="favorite-btn"
         onClick={ setFavorite }
       >
         <img
           src={ favoriteIconBlack }
           alt="favorite"
           className="icon-img"
-          data-testid={ `${index}-horizontal-favorite-btn` }
+          data-testid="favorite-btn"
         />
       </button>
     );
@@ -81,23 +80,21 @@ function IconFavorite({ id, type, index }) {
     <button
       type="button"
       className="icon-btn"
-      data-testid="favorite-btn"
       onClick={ setFavorite }
     >
       <img
         src={ favoriteIcon }
         alt="favorite"
         className="icon-img"
-        data-testid={ `${index}-horizontal-favorite-btn` }
+        data-testid="favorite-btn"
       />
     </button>
   );
 }
 
-IconFavorite.propTypes = {
+Favorite.propTypes = {
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  index: PropTypes.number.isRequired,
 };
 
-export default IconFavorite;
+export default Favorite;

@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import Favorite from '../components/Favorite';
+import IconCopy from '../components/IconCopy';
 import { getDetailsRecipe } from '../services/recipesAPI';
 
 function RecipeInProgress({ type, history }) {
@@ -82,18 +84,8 @@ function RecipeInProgress({ type, history }) {
             >
               {recipe[0][`str${recipeType}`]}
             </h3>
-            <button
-              type="button"
-              data-testid="share-btn"
-            >
-              Compartilhar
-            </button>
-            <button
-              type="button"
-              data-testid="favorite-btn"
-            >
-              Favoritar
-            </button>
+            <IconCopy id={ id } type={ type } index={ 0 } />
+            <Favorite id={ id } type={ type } />
             <p data-testid="recipe-category">{recipe[0].strCategory}</p>
             <ul>
               {

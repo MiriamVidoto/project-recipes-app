@@ -7,7 +7,7 @@ import './style/Profile.css';
 function Profile() {
   const history = useHistory();
 
-  const getEmail = localStorage.getItem('user');
+  const getEmail = JSON.parse(localStorage.getItem('user'));
 
   const handleLogout = () => {
     localStorage.clear();
@@ -21,7 +21,7 @@ function Profile() {
         data-testid="profile-email"
         className="email-profile"
       >
-        {getEmail}
+        {getEmail.email}
       </p>
       <div className="btns-profile">
         <button

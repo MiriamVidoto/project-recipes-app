@@ -13,6 +13,7 @@ function Provider({ children }) {
   const [searchInput, setSearchInput] = useState('');
   const [recipes, setRecipes] = useState([]);
   const [type, setType] = useState('meal');
+  const [buttonsCategories, setButtonsCategories] = useState([]);
   const history = useHistory();
 
   const verifyValue = () => {
@@ -31,19 +32,20 @@ function Provider({ children }) {
     }
   };
 
-  const [buttonsCategories, setButtonsCategories] = useState([]);
-
   const getSearchAPI = async () => {
     if (category === 'ingredient') {
       const newRecipes = await getRecipesIngredient(type, searchInput);
+      recipesOne(newRecipes);
       setRecipes(newRecipes);
       recipesOne(newRecipes);
     } else if (category === 'nameSearch') {
       const newRecipes = await getRecipesName(type, searchInput);
+      recipesOne(newRecipes);
       setRecipes(newRecipes);
       recipesOne(newRecipes);
     } else if (category === 'firstLetter' && searchInput.length === 1) {
       const newRecipes = await getRecipesfirstLetter(type, searchInput);
+      recipesOne(newRecipes);
       setRecipes(newRecipes);
       recipesOne(newRecipes);
     } else {

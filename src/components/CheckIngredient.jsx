@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
+import myContext from '../context/Context';
 
 function CheckIngredient({
   type,
@@ -9,6 +10,7 @@ function CheckIngredient({
   ingrediente,
 }) {
   const [ingredientsChecked, setIngredientsChecked] = useState(true);
+  const { recipesCheck, setRecipesCheck } = useContext(myContext);
   const [some, setSome] = useState([]);
 
   const testType = type === 'meal' ? 'meals' : 'cocktails';
@@ -44,6 +46,7 @@ function CheckIngredient({
 
   const toggleCheckbox = () => {
     setIngredientsChecked(!ingredientsChecked);
+    setRecipesCheck(!recipesCheck);
     const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (!storage[testType][id]) {
       const obj = { ...storage[testType], [id]: [ingredientSome] };

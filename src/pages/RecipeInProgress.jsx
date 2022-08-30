@@ -12,35 +12,45 @@ function RecipeInProgress({ type, history }) {
   const recipeType = type === 'meal' ? 'Meal' : 'Drink';
   const [recipe, setRecipe] = useState([]);
   const [isDisabled, setIsDisabled] = useState(true);
+  const [recipesCheck, setRecipesCheck] = useState({});
+  const local = JSON.parse(localStorage.getItem('inProgressRecipes'));
+
+  const ingredientes = recipe.length !== 0 ? Object.keys(recipe[0])
+    .filter((key) => key.includes('strIngredient'))
+    : [];
+
+  const verifyIngredientesCheck = () => {
+    const ListArray = ingredientes
+      .map((ingrediente) => recipe[0][ingrediente]).filter((element) => element !== null)
+      .filter((e) => e.length !== 0);
+    setRecipesCheck(ListArray);
+  };
 
   const getRecipeAPI = async () => {
     const newRecipe = await getDetailsRecipe(type, id);
     setRecipe(newRecipe);
   };
 
-  const ingredientes = recipe.length !== 0 ? Object.keys(recipe[0])
-    .filter((key) => key.includes('strIngredient'))
-    : [];
-
   const listIngredients = ingredientes
     .filter((e) => recipe[0][e] !== null)
     .filter((ele) => recipe[0][ele].length !== 0);
-
-  const local = JSON.parse(localStorage.getItem('inProgressRecipes'));
 
   const getLocalStorage = () => {
     const progressRecipes = localStorage.getItem('inProgressRecipes')
       ? local
       : { meals: {}, cocktails: {} };
     localStorage.setItem('inProgressRecipes', JSON.stringify(progressRecipes));
+    setRecipesCheck(progressRecipes);
   };
 
   const handleButton = () => {
     history.push('/done-recipes');
   };
+
   useEffect(() => {
     getRecipeAPI();
     getLocalStorage();
+    verifyIngredientesCheck();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

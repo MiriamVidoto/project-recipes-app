@@ -1,5 +1,5 @@
 import React from 'react';
-import RecipeInProgress from '../components/RecipeInProgress';
+import RecipeInProgress from './RecipeInProgress';
 
 function FoodProgress() {
   return (

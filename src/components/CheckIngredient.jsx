@@ -2,10 +2,19 @@ import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-function CheckIngredient({ type, index, recipe, ingrediente }) {
-  const [ingredientsChecked, setIngredientsChecked] = useState(false);
+function CheckIngredient({
+  type,
+  index,
+  recipe,
+  ingrediente,
+}) {
+  const [ingredientsChecked, setIngredientsChecked] = useState(true);
+  const [some, setSome] = useState([]);
+
   const testType = type === 'meal' ? 'meals' : 'cocktails';
+
   const { id } = useParams();
+
   const amount = recipe.length !== 0 ? Object.keys(recipe[0])
     .filter((key) => key.includes('strMeasure'))
     : [];
@@ -22,8 +31,14 @@ function CheckIngredient({ type, index, recipe, ingrediente }) {
     }
   };
 
+  const verifyIngredientesCheck = () => {
+    const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    setSome(ingredientSome);
+  };
+
   useEffect(() => {
     verifyCheck();
+    verifyIngredientesCheck();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -31,21 +46,15 @@ function CheckIngredient({ type, index, recipe, ingrediente }) {
     setIngredientsChecked(!ingredientsChecked);
     const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (!storage[testType][id]) {
-      const obj = { [id]: [ingredientSome] };
+      const obj = { ...storage[testType], [id]: [ingredientSome] };
       storage[testType] = obj;
+    } else if (storage[testType][id].includes(ingredientSome)) {
+      const filter = storage[testType][id].filter((ele) => ele !== ingredientSome);
+      storage[testType][id] = filter;
     } else {
       storage[testType][id].push(ingredientSome);
     }
     localStorage.setItem('inProgressRecipes', JSON.stringify(storage));
-
-    // if (!ingredientsChecked) {
-    //   local[testType][id].push(e.target.value);
-    //   localStorage.setItem('inProgressRecipes', JSON.stringify(local));
-    // } else {
-    //   const i = (local[testType][id]).indexOf(e.target.value);
-    //   local[testType][id].splice(i);
-    //   localStorage.setItem('inProgressRecipes', JSON.stringify(local));
-    // }
   };
 
   return (
@@ -56,17 +65,12 @@ function CheckIngredient({ type, index, recipe, ingrediente }) {
       <label
         htmlFor={ ingrediente }
         className="input"
-
       >
         <input
           type="checkbox"
           onChange={ toggleCheckbox }
           id={ ingrediente }
           checked={ ingredientsChecked }
-          value={
-            `${recipe[0][ingrediente]} - ${recipe[0][amount[index]]}`
-          }
-
         />
         {ingredientSome}
       </label>
@@ -76,12 +80,10 @@ function CheckIngredient({ type, index, recipe, ingrediente }) {
 }
 
 CheckIngredient.propTypes = {
-  index: PropTypes.number.isRequired,
-  ingrediente: PropTypes.string.isRequired,
-  recipe: PropTypes.shape({
-    length: PropTypes.number,
-  }).isRequired,
-  type: PropTypes.string.isRequired,
-};
+  index: PropTypes.number,
+  ingrediente: PropTypes.string,
+  recipe: PropTypes.array,
+  type: PropTypes.string,
+}.isRequired;
 
 export default CheckIngredient;

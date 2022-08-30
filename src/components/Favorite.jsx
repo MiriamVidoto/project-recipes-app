@@ -36,17 +36,17 @@ function Favorite({ id, type }) {
     if (isFavorite === false) {
       const newFavoriteRecipes = [...listFavoriteRecipes,
         {
-          id: recipe[0][`id${recipeType}`],
+          id: recipe[0] ? recipe[0][`id${recipeType}`] : undefined,
           type: favoriteType,
           nationality: type === 'meal'
-            ? recipe[0].strArea
+            ? recipe[0]?.strArea
             : '',
-          category: recipe[0].strCategory,
+          category: recipe[0]?.strCategory,
           alcoholicOrNot: type === 'meal'
             ? ''
-            : recipe[0].strAlcoholic,
-          name: recipe[0][`str${recipeType}`],
-          image: recipe[0][`str${recipeType}Thumb`],
+            : recipe[0]?.strAlcoholic,
+          name: recipe[0] ? recipe[0][`str${recipeType}`] : undefined,
+          image: recipe[0] ? recipe[0][`str${recipeType}Thumb`] : undefined,
         }];
       localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
     } else {

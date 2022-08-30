@@ -99,6 +99,6 @@ describe('Testando o componente SearchBar Foods', () => {
     userEvent.click(execSearchButton);
 
     const firstLetterResult = screen.findAllByRole('link');
-    expect((await firstLetterResult).length).toBe(12);
+    expect((await firstLetterResult).length).toBe(2);
   });
 });

@@ -35,7 +35,7 @@ function ButtonsCategory() {
         All
       </button>
       {
-        buttonsCategories && buttonsCategories
+        buttonsCategories ? buttonsCategories
           .slice(0, LIMIT_CATEGORIES)
           .map((category) => (
             <button
@@ -47,7 +47,7 @@ function ButtonsCategory() {
             >
               { category.strCategory }
             </button>
-          ))
+          )) : undefined
       }
     </div>
   );

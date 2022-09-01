@@ -60,6 +60,10 @@ function IconFavorite({ id, type, index }) {
     setIsfavorite(!isFavorite);
   };
 
+  useEffect(() => {
+
+  }, []);
+
   if (isFavorite) {
     return (
       <button

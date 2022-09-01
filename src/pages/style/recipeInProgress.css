@@ -1,0 +1,76 @@
+/* .input {
+  text-decoration: line-through;
+} */
+
+.img-progress {
+  border-radius: 10px;
+  box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.377);
+  margin-bottom: 3%;
+  width: 70%;
+}
+
+.div-progress {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+}
+
+.title-progress {
+  border: 1px solid rgba(0, 0, 0, 0.219);
+  border-radius: 5px;
+  box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.219);
+  font-size: 30px;
+  margin-top: 1%;
+  padding: 5px;
+  text-shadow: 2px 5px 5px rgba(0, 0, 0, 0.452);
+}
+
+.icons-progress {
+  flex-direction: row;
+  padding: 5px;
+  width: 75%;
+}
+
+.ul-progress {
+  align-self: flex-start;
+}
+
+.text-progress {
+  font-weight: 400;
+  padding: 10px;
+  text-align: justify;
+}
+
+.btn-progress {
+  align-self: center;
+  background-color: rgb(37, 37, 37);
+  border: none;
+  border-radius: 5px;
+  bottom: 0;
+  box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.4);
+  color: white;
+  font-size: 15px;
+  margin: 5px;
+  padding: 10px;
+  position: fixed;
+}
+
+.btn-progress:disabled {
+  align-self: center;
+  background-color: rgba(37, 37, 37, 0.39);
+  border: none;
+  border-radius: 5px;
+  bottom: 0;
+  box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.4);
+  color: white;
+  font-size: 15px;
+  margin: 5px;
+  padding: 10px;
+}
+
+.btn-progress:hover {
+  background-color: rgb(10, 10, 10);
+  cursor: pointer;
+}

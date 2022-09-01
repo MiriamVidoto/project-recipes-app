@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import myContext from '../context/Context';
+import './styles/checkIngredient.css';
 
 function CheckIngredient({
   type,
@@ -64,10 +65,11 @@ function CheckIngredient({
     <li
       data-testid={ `${index}-ingredient-step` }
       id="li-ingredients"
+      className="li-checkbox"
     >
       <label
         htmlFor={ ingrediente }
-        className="input"
+        className="label-checkbox"
       >
         <input
           type="checkbox"
@@ -75,6 +77,7 @@ function CheckIngredient({
           id={ ingrediente }
           checked={ ingredientsChecked }
         />
+        {' '}
         {ingredientSome}
       </label>
 

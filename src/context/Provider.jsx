@@ -15,6 +15,7 @@ function Provider({ children }) {
   const [type, setType] = useState('meal');
   const [buttonsCategories, setButtonsCategories] = useState([]);
   const [recipesCheck, setRecipesCheck] = useState(true);
+  const [favoRender, setFavoRender] = useState(true);
   const history = useHistory();
 
   const verifyValue = () => {
@@ -68,6 +69,8 @@ function Provider({ children }) {
     setButtonsCategories,
     recipesCheck,
     setRecipesCheck,
+    favoRender,
+    setFavoRender,
   };
   return (
     <myContext.Provider value={ value }>

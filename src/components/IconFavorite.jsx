@@ -1,12 +1,14 @@
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import favoriteIcon from '../images/whiteHeartIcon.svg';
 import favoriteIconBlack from '../images/blackHeartIcon.svg';
 import { getDetailsRecipe } from '../services/recipesAPI';
+import myContext from '../context/Context';
 
 function IconFavorite({ id, type, index }) {
   const [isFavorite, setIsfavorite] = useState(false);
   const [recipe, setRecipe] = useState([]);
+  const { favoRender, setFavoRender } = useContext(myContext);
 
   const favoriteType = type === 'meal' ? 'food' : 'drink';
   const recipeType = type === 'meal' ? 'Meal' : 'Drink';
@@ -56,6 +58,7 @@ function IconFavorite({ id, type, index }) {
   };
 
   const setFavorite = () => {
+    setFavoRender(!favoRender);
     setFavoriteLocalStorage();
     setIsfavorite(!isFavorite);
   };

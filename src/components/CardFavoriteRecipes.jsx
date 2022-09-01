@@ -3,25 +3,29 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import IconCopy from './IconCopy';
 import IconFavorite from './IconFavorite';
+import './styles/cardFavoriteRecipes.css';
 
 function CardFavoriteRecipes({ listRecipes }) {
   return (
-    <div>
+    <div className="container-card-favorites">
       {
         listRecipes.map((element, index) => (
-          <div key={ index }>
+          <div key={ index } className="container-cards">
             <Link to={ `/${element.type}s/${element.id}` } className="a-thumb">
               <img
                 src={ element.image }
                 alt={ element.name }
                 data-testid={ `${index}-horizontal-image` }
-                className="thumb"
+                className="thumb-favorite"
               />
             </Link>
             <div>
               {
                 element.type === 'food' ? (
-                  <p data-testid={ `${index}-horizontal-top-text` }>
+                  <p
+                    data-testid={ `${index}-horizontal-top-text` }
+                    className="nationality-food"
+                  >
                     { `${element.nationality} - ${element.category}` }
                   </p>
                 )
@@ -34,12 +38,15 @@ function CardFavoriteRecipes({ listRecipes }) {
                   )
               }
               <Link to={ `/${element.type}s/${element.id}` }>
-                <h3 data-testid={ `${index}-horizontal-name` }>
+                <h4
+                  data-testid={ `${index}-horizontal-name` }
+                  className="link-favorites"
+                >
                   {element.name }
-                </h3>
+                </h4>
               </Link>
             </div>
-            <div>
+            <div className="container-icons">
               <IconCopy id={ element.id } type={ element.type } index={ index } />
               <IconFavorite id={ element.id } type={ element.type } index={ index } />
             </div>

@@ -3,6 +3,7 @@ import ButtonsFilter from '../components/ButtonsFilter';
 import CardFavoriteRecipes from '../components/CardFavoriteRecipes';
 import Header from '../components/Header';
 import myContext from '../context/Context';
+import './style/favoriteRecipes.css';
 
 function FavoriteRecipes() {
   const [listFavoriteRecipes, setListFavoriteRecipes] = useState([]);
@@ -31,10 +32,12 @@ function FavoriteRecipes() {
   };
 
   return (
-    <div className="favorite-recipes">
+    <div>
       <Header title="Favorite Recipes" />
-      <ButtonsFilter handleFilter={ handleFilter } />
-      <CardFavoriteRecipes listRecipes={ listFavoriteRecipes } />
+      <div className="favorite-page">
+        <ButtonsFilter handleFilter={ handleFilter } />
+        <CardFavoriteRecipes listRecipes={ listFavoriteRecipes } />
+      </div>
     </div>
   );
 }

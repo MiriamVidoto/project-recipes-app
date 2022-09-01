@@ -12,6 +12,7 @@ function CheckIngredient({
 }) {
   const [ingredientsChecked, setIngredientsChecked] = useState(true);
   const { recipesCheck, setRecipesCheck } = useContext(myContext);
+  const [some, setSome] = useState([]);
 
   const testType = type === 'meal' ? 'meals' : 'cocktails';
 
@@ -34,7 +35,9 @@ function CheckIngredient({
   };
 
   const verifyIngredientesCheck = () => {
+    // const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
     setSome(ingredientSome);
+    console.log(some);
   };
 
   useEffect(() => {

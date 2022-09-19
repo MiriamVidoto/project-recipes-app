@@ -71,7 +71,7 @@ function RecipeInProgress({ type }) {
     // verifyIngredientesCheck();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log(ListArray);
+
   return (
 
     <div className="div-progress">

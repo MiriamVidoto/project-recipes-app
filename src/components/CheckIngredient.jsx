@@ -10,7 +10,7 @@ function CheckIngredient({
   recipe,
   ingrediente,
 }) {
-  const [ingredientsChecked, setIngredientsChecked] = useState(true);
+  const [ingredientsChecked, setIngredientsChecked] = useState(false);
   const { recipesCheck, setRecipesCheck } = useContext(myContext);
   const [some, setSome] = useState([]);
 

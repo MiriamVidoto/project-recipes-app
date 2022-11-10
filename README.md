@@ -1,6 +1,6 @@
 # Boas-vindas ao repositório do projeto App de Receitas!
 
-Este foi um projeto realizado em grupo, onde utilizamos metodologias ageis para nossa organização.
+Este foi um projeto realizado durante o meu curso  na Trybe, em grupo, onde utilizamos metodologias ageis para nossa organização.
 
 Foi desenvolvido um app de receitas, utilizando o que há de mais moderno dentro do ecossistema React: Hooks e Context API!
 

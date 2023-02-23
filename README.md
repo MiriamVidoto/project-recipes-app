@@ -22,3 +22,7 @@ Foi utilizado TDD durante o desenvolvimento de todo o projeto.
   - Utilizamos o _React Hook useContext_
   - Utilizamos o _React Hook useEffect_
   - Criamos Hooks customizados
+
+ ###### Projeto desenvolvido por: [Miriam Vidoto](https://github.com/MiriamVidoto) & [Jorge Flávio Casé
+](https://github.com/JorgeCase) & [Debora Franchi](https://github.com/DeFranchi) & [Leonardo Campos](https://github.com/leovcampos) & [Rodrigo Sena
+](https://github.com/RodrigoSen4)

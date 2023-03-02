@@ -13,7 +13,7 @@ import Recipes from './Recipes';
 function Routes() {
   return (
     <Switch>
-      <Route exact path="/" component={ Login } />
+      <Route exact path="/project-recipes-app" component={ Login } />
       <Route exact path="/foods" render={ () => <Recipes type="meal" /> } />
       <Route exact path="/drinks" render={ () => <Recipes type="drinks" /> } />
       <Route exact path="/foods/:id" render={ () => <RecipeDetails type="meal" /> } />
